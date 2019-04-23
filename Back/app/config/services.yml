@@ -33,4 +33,7 @@ services:
     # AppBundle\Service\ExampleService:
     #     arguments:
     #         $someArgument: 'some_value'
+    AppBundle\EventListener\UserEventListener:
+        tags:
+            - { name: kernel.event_listener, event: sbs.admin_lte.user, method: onShowUser }
     
