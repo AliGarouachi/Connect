@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Account</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ account.id }}</td>
+            </tr>
+            <tr>
+                <th>Amount</th>
+                <td>{{ account.amount }}</td>
+            </tr>
+            <tr>
+                <th>Qrstring</th>
+                <td>{{ account.qrstring }}</td>
+            </tr>
+            <tr>
+                <th>Numberaccess</th>
+                <td>{{ account.numberaccess }}</td>
+            </tr>
+            <tr>
+                <th>Expirationdate</th>
+                <td>{% if account.expirationdate %}{{ account.expirationdate|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Receivingdate</th>
+                <td>{% if account.receivingdate %}{{ account.receivingdate|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('accounts_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('accounts_edit', { 'id': account.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

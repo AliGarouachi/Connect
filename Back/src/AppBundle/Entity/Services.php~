@@ -29,38 +29,5 @@ class Services
     private $lable;
 
 
-
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Set lable
-     *
-     * @param string $lable
-     *
-     * @return Services
-     */
-    public function setLable($lable)
-    {
-        $this->lable = $lable;
-
-        return $this;
-    }
-
-    /**
-     * Get lable
-     *
-     * @return string
-     */
-    public function getLable()
-    {
-        return $this->lable;
-    }
 }
+
