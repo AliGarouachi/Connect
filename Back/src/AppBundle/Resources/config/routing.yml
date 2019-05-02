@@ -13,3 +13,6 @@ app_clients:
 app_yes:
         resource: "@AppBundle/Resources/config/routing/admin.yml"
         prefix:   /admin
+app_accounts:
+        resource: "@AppBundle/Resources/config/routing/accounts.yml"
+        prefix:   /accounts
