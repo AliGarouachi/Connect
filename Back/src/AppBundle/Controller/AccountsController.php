@@ -36,8 +36,7 @@ class AccountsController extends Controller
         $account = new Accounts();
         $form = $this->createForm('AppBundle\Form\AccountsType', $account);
         $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($account);
             $em->flush();

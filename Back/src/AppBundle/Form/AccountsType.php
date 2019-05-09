@@ -13,7 +13,7 @@ class AccountsType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('amount')->add('qrstring')->add('numberaccess')->add('expirationdate')->add('receivingdate');
+        $builder->add('amount')->add('qrstring')->add('numberaccess');
     }/**
      * {@inheritdoc}
      */

@@ -18,22 +18,29 @@ import { SearchFilterPageModule } from './pages/modal/search-filter/search-filte
 // Components
 import { NotificationsComponent } from './components/notifications/notifications.component';
 
+//QR Code
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+import { FormsModule } from '@angular/forms';
+
+//SQLLite
+import { IonicStorageModule } from '@ionic/storage';
 
 @NgModule({
   declarations: [AppComponent, NotificationsComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    IonicModule.forRoot(),
+    IonicModule.forRoot(),IonicStorageModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
-    ImagePageModule,
+    ImagePageModule,FormsModule,
     SearchFilterPageModule
   ],
   entryComponents: [NotificationsComponent],
   providers: [
     StatusBar,
     SplashScreen,
+    BarcodeScanner,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

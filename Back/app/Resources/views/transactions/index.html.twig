@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{# {% extends 'base.html.twig' %}
 
 {% block body %}
     <h1>Transactions list</h1>
@@ -38,4 +38,5 @@
             <a href="{{ path('transactions_new') }}">Create a new transaction</a>
         </li>
     </ul>
-{% endblock %}
+{% endblock %} #}
+{{ transactions|json_encode() }}

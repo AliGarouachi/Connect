@@ -26,35 +26,27 @@
 </ion-header>
 
 <ion-content>
-  <ion-card no-margin class="no-radius">
-    <ion-item lines="none" color="medium">
-      <ion-label>
-        <h2 no-margin class="fw500 no-margin">
-          <ion-text color="dark">Alert / Toast test</ion-text>
-        </h2>
+  <h1>Click Button To Scan</h1>
 
-        <p class="text-11x no-margin">
-          <ion-text  color="primary">{{yourLocation}}</ion-text>
-        </p>
-      </ion-label>
-      <ion-button shape="round" fill="outline" size="small" color="primary" (click)="alertLocation()">
-        Location
-        <ion-icon name="locate"></ion-icon>
-      </ion-button>
-    </ion-item>
-  </ion-card>
-
-  <ion-card class="bg-white">
-    <ion-img [src]="themeCover"></ion-img>
-    <ion-button expand="full" color="dark" (click)="presentImage(themeCover)" no-margin>
-      Modal 1: Modal Image
-    </ion-button>
-  </ion-card>
-
-  <ion-button margin shape="round" expand="full" color="secondary" (click)="searchFilter()">
-    Modal 2: Search Filter
+  <ion-button (click)="scanCode()">
+    Scan Code
   </ion-button>
-  
+
+  <div *ngIf="scannedData">
+    <p>
+      Scanned Code Text : <b>{{ scannedData["text"] }}</b>
+    </p>
+    <p>
+      Scanned Code Format : <b>{{ scannedData["format"] }}</b>
+    </p>
+  </div>
+
+  <h1>Enter Value to Create QR code</h1>
+  <ion-input type="text" [(ngModel)]="encodedData"></ion-input>
+
+  <ion-button (click)="encodedText()">
+    Create QR
+  </ion-button>
   <popmenu></popmenu>
 </ion-content>
   

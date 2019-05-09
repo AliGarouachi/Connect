@@ -56,7 +56,16 @@ class Accounts
      */
     private $receivingdate;
 
-
+    public function __construct($period = 1)
+    {
+        $this->receivingdate = new \DateTime();
+        $this->expirationdate = new \DateTime();
+        if($this->expirationdate->format('m')!=12)
+            $this->expirationdate->setDate($this->expirationdate->format('Y'), $this->expirationdate->format('m')+$period, $this->expirationdate->format('d'));
+        else
+            $this->expirationdate->setDate($this->expirationdate->format('Y')+1, $period, $this->expirationdate->format('d'));
+            
+    }
 
     /**
      * Get id
