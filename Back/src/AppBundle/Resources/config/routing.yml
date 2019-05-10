@@ -16,3 +16,6 @@ app_yes:
 app_accounts:
         resource: "@AppBundle/Resources/config/routing/accounts.yml"
         prefix:   /accounts
+get_token:
+    path:     /getToken
+    defaults: { _controller: AppBundle:Token:getToken }
