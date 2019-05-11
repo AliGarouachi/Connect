@@ -5,7 +5,9 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Transactions;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 /**
  * Transaction controller.
  *
@@ -21,10 +23,12 @@ class TransactionsController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $transactions = $em->getRepository('AppBundle:Transactions')->findAll();
-
-        return $this->render('transactions/index.html.twig', array(
-            'transactions' => $transactions,
-        ));
+        $serializer=new Serializer([new ObjectNormalizer()]);
+        $transactions=$serializer->normalize($transactions);
+        return new JsonResponse($transactions);
+        // return $this->render('transactions/index.html.twig', array(
+        //     'transactions' => $transactions,
+        // ));
     }
 
     /**

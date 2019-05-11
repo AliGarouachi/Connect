@@ -1,5 +1,2 @@
-{% if app.user %}
-    {{ "Okey"|json_encode() }}
-{% else %}
-    {{ "No"|json_encode() }}
-{% endif %}
+
+    {{ dump(app) }}

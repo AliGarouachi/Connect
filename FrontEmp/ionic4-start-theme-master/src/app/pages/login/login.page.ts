@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NavController, MenuController, ToastController, AlertController, LoadingController } from '@ionic/angular';
-
+import { LoginService } from '../../Service/Login/login.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -16,11 +16,13 @@ export class LoginPage implements OnInit {
     public toastCtrl: ToastController,
     public alertCtrl: AlertController,
     public loadingCtrl: LoadingController,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private login:LoginService
   ) { }
 
   ionViewWillEnter() {
     this.menuCtrl.enable(false);
+    
   }
 
   ngOnInit() {
@@ -33,6 +35,7 @@ export class LoginPage implements OnInit {
         Validators.required
       ])]
     });
+
   }
 
   async forgotPass() {
@@ -82,7 +85,9 @@ export class LoginPage implements OnInit {
 
   // // //
   goToRegister() {
-    this.navCtrl.navigateRoot('/register');
+    this.login.Logged();
+    console.log("ge");
+    //this.navCtrl.navigateRoot('/register');
   }
 
   goToHome() {

@@ -4,7 +4,9 @@ namespace AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
-
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 class TokenController extends Controller
 {
     private $tokenManager;
@@ -17,11 +19,15 @@ class TokenController extends Controller
         $csrfToken = $this->tokenManager
             ? $this->tokenManager->getToken('authenticate')->getValue()
             : null;
-        echo json_encode($csrfToken);
-        die;
-        return $this->render('AppBundle:Token:get_token.html.twig', array(
-            
-        ));
+        $csrfToken=array($csrfToken);
+        $serializer=new Serializer([new ObjectNormalizer()]);
+        $csrfToken=$serializer->normalize($csrfToken);
+        return new JsonResponse($csrfToken);
+        // return $this->render('AppBundle:Token:get_token.html.twig', array(
+        //     "csrfToken" =>$csrfToken
+        // ));
+        
+       
         
     }
     public function loggedAction()

@@ -21,6 +21,7 @@ import {
 } from "@ionic-native/barcode-scanner/ngx";
 //SqlLite
 import { Storage } from '@ionic/storage';
+import { store } from '@angular/core/src/render3';
 
 @Component({
   selector: 'app-home-results',
@@ -92,6 +93,7 @@ export class HomeResultsPage {
 
   }
   scanCode() {
+    
     this.barcodeScanner
       .scan()
       .then(barcodeData => {

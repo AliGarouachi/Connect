@@ -20,6 +20,7 @@ class AppKernel extends Kernel
             new SbS\AdminLTEBundle\SbSAdminLTEBundle(),
             new AppBundle\AppBundle(),
             new FOS\UserBundle\FOSUserBundle(),
+            new Nelmio\CorsBundle\NelmioCorsBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
