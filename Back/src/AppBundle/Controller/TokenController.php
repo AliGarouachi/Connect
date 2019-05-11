@@ -17,8 +17,17 @@ class TokenController extends Controller
         $csrfToken = $this->tokenManager
             ? $this->tokenManager->getToken('authenticate')->getValue()
             : null;
+        echo json_encode($csrfToken);
+        die;
         return $this->render('AppBundle:Token:get_token.html.twig', array(
-            'csrf_token' => $csrfToken
+            
+        ));
+        
+    }
+    public function loggedAction()
+    {
+        return $this->render('AppBundle:Token:get_token.html.twig', array(
+            
         ));
     }
 

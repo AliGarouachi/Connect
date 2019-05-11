@@ -19,3 +19,6 @@ app_accounts:
 get_token:
     path:     /getToken
     defaults: { _controller: AppBundle:Token:getToken }
+logged:
+    path:     /logged
+    defaults: { _controller: AppBundle:Token:logged }
