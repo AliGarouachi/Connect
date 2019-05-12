@@ -6,7 +6,7 @@ import {
   ToastController,
   PopoverController,
   ModalController,
-  Events
+  Events,LoadingController
 } from '@ionic/angular';
 
 // Modals
@@ -21,8 +21,10 @@ import {
 } from "@ionic-native/barcode-scanner/ngx";
 //SqlLite
 import { Storage } from '@ionic/storage';
-import { store } from '@angular/core/src/render3';
-
+import { store, text } from '@angular/core/src/render3';
+import { User } from '../../Entity/user';
+import { LoginService } from 'src/app/Service/Login/login.service';
+import { AccountService } from 'src/app/Service/Account/account.service';
 @Component({
   selector: 'app-home-results',
   templateUrl: './home-results.page.html',
@@ -35,10 +37,13 @@ export class HomeResultsPage {
   encodeData: any;
   scannedData: {};
   barcodeScannerOptions: BarcodeScannerOptions;
-  Payment:boolean;
-  Transfert : boolean;
-  VerifyAccess : boolean;
-  GiveAccess :boolean;
+  Payment: boolean;
+  Transfert: boolean;
+  VerifyAccess: boolean;
+  GiveAccess: boolean;
+  amount: any;
+  numberaccess: any;
+  user: User = LoginService.user;
   constructor(
     public navCtrl: NavController,
     public menuCtrl: MenuController,
@@ -46,9 +51,11 @@ export class HomeResultsPage {
     public alertCtrl: AlertController,
     public modalCtrl: ModalController,
     public toastCtrl: ToastController,
-    public event: Events ,
-    public storage:Storage,
-    private barcodeScanner: BarcodeScanner
+    public event: Events,
+    public storage: Storage,
+    private barcodeScanner: BarcodeScanner,
+    private account: AccountService,
+    public loadingCtrl: LoadingController,
   ) {
     this.encodeData = "https://www.FreakyJolly.com";
     //Options
@@ -56,55 +63,136 @@ export class HomeResultsPage {
       showTorchButton: true,
       showFlipCameraButton: true
     };
-    event.subscribe('FormLoad' , a =>{
-      if(a==0)
-      {
-        this.Payment=true;
-        this.GiveAccess=false;
-        this.Transfert=false;
-        this.VerifyAccess=false;
+    event.subscribe('FormLoad', a => {
+      console.log('event pass');
+      if (a == 0) {
+        console.log('if passe');
+        this.Payment = true;
+        this.GiveAccess = false;
+        this.Transfert = false;
+        this.VerifyAccess = false;
       }
-      else if(a==1)
-      {
-        this.Payment=false;
-        this.GiveAccess=true;
-        this.Transfert=false;
-        this.VerifyAccess=false;
+      else if (a == 1) {
+        this.Payment = false;
+        this.GiveAccess = true;
+        this.Transfert = false;
+        this.VerifyAccess = false;
 
       }
-      else if(a==2)
-      {
-        this.Payment=false;
-        this.GiveAccess=false;
-        this.Transfert=true;
-        this.VerifyAccess=false;
-        
+      else if (a == 2) {
+        this.Payment = false;
+        this.GiveAccess = false;
+        this.Transfert = true;
+        this.VerifyAccess = false;
+
       }
-      else if(a==3)
-      {
-        this.Payment=false;
-        this.GiveAccess=false;
-        this.Transfert=false;
-        this.VerifyAccess=true;
-        
+      else if (a == 3) {
+        this.Payment = false;
+        this.GiveAccess = false;
+        this.Transfert = false;
+        this.VerifyAccess = true;
+
       }
 
     });
+    this.GiveAccess = true;
+  }
+  giveAccess() {
+    let form = {
+      "Amount": this.amount,
+      "Numberaccess": this.numberaccess,
+      "Qrstring": this.scannedData
+    }
+    this.account.existAccount(form).subscribe(res => {
+      res = res.json();
+      if (res[0] == 'yes') {
+        
+        this.notify("Carte déja utilisée","Cette carte est déja liée a un compte");
+      }
+      else {
+        this.account.giveAccess(form);
+        this.notify("Compte Crée","le compte a été crée ");
+
+      }
+    });
+    
+  }
+  in() {
+
+    let form = {
+      "Amount": this.amount,
+      "Qrstring": this.scannedData
+    }
+    this.account.existAccount(form).subscribe(res => {
+      res = res.json();
+      if (res[0] == 'yes') {
+        
+        this.account.add(form);
+        this.notify("Alimentation","Le compte a été alimenter de : "+this.amount+"dt");
+      }
+      else {
+        this.notify("compte introuvable","le code scanner n'est lié a aucun compte");
+
+      }
+    });
+
 
   }
+  async notify(title,message)
+  {
+    const alert = await this.alertCtrl.create({
+      header: title,
+      message: message
+      
+    });
+
+    await alert.present();
+  }
+  out() {
+    let form = {
+      "Amount": this.amount,
+      "Qrstring": this.scannedData
+    }
+    this.account.existAccount(form).subscribe(res => {
+      res = res.json();
+      if (res[0] == 'yes') {
+        this.account.verifySold(form).subscribe(res=>{
+          res=res.json();
+          let sold=parseInt(res[0]);
+          
+          if(sold-this.amount>=0)
+          {
+            this.account.getpayed(form);
+            this.notify("Pay","la somme de "+this.amount+"dt a été retirer du compte");
+          }
+          else
+          {
+            this.notify("Sold insufisant","il vous reste la somme de : "+sold);
+          }
+        });
+        
+      }
+      else {
+        this.notify("compte introuvable","le code scanner n'est lié a aucun compte");
+
+      }
+    });
+  }
   scanCode() {
-    
+    //  this.scannedData = 'testValue';
     this.barcodeScanner
       .scan()
       .then(barcodeData => {
         alert("Barcode data " + JSON.stringify(barcodeData));
         this.scannedData = barcodeData;
+        console.log(this.scannedData['text']);
+        this.scannedData=this.scannedData['text'];
       })
       .catch(err => {
         console.log("Error", err);
       });
   }
- 
+
   encodedText() {
     this.barcodeScanner
       .encode(this.barcodeScanner.Encode.TEXT_TYPE, this.encodeData)
@@ -122,6 +210,7 @@ export class HomeResultsPage {
   ionViewWillEnter() {
     this.menuCtrl.enable(true);
   }
+
 
   settings() {
     this.navCtrl.navigateForward('settings');
@@ -166,7 +255,7 @@ export class HomeResultsPage {
     changeLocation.present();
   }
 
-  async searchFilter () {
+  async searchFilter() {
     const modal = await this.modalCtrl.create({
       component: SearchFilterPage
     });
@@ -190,5 +279,6 @@ export class HomeResultsPage {
     });
     return await popover.present();
   }
+
 
 }

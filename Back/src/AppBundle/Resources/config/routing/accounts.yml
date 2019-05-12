@@ -22,3 +22,19 @@ accounts_delete:
     path:     /{id}/delete
     defaults: { _controller: "AppBundle:Accounts:delete" }
     methods:  DELETE
+accounts_out:
+    path:     /{qrcode}/{amount}/out
+    defaults: { _controller: "AppBundle:Accounts:out" }
+    methods:  [GET, POST]
+accounts_in:
+    path:     /{qrcode}/{amount}/in
+    defaults: { _controller: "AppBundle:Accounts:in" }
+    methods:  [GET, POST]
+accounts_exist:
+    path:     /{qrcode}/exist
+    defaults: { _controller: "AppBundle:Accounts:exist" }
+    methods:  [GET, POST]
+accounts_sold:
+    path:     /{qrcode}/sold
+    defaults: { _controller: "AppBundle:Accounts:sold" }
+    methods:  [GET, POST]

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NavController, MenuController, ToastController, AlertController, LoadingController } from '@ionic/angular';
 import { LoginService } from '../../Service/Login/login.service';
+import { Storage } from '@ionic/storage';
+import { User } from 'src/app/Entity/user';
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -9,7 +11,6 @@ import { LoginService } from '../../Service/Login/login.service';
 })
 export class LoginPage implements OnInit {
   public onLoginForm: FormGroup;
-
   constructor(
     public navCtrl: NavController,
     public menuCtrl: MenuController,
@@ -17,7 +18,8 @@ export class LoginPage implements OnInit {
     public alertCtrl: AlertController,
     public loadingCtrl: LoadingController,
     private formBuilder: FormBuilder,
-    private login:LoginService
+    private login:LoginService,
+    private storage: Storage
   ) { }
 
   ionViewWillEnter() {
@@ -28,7 +30,7 @@ export class LoginPage implements OnInit {
   ngOnInit() {
 
     this.onLoginForm = this.formBuilder.group({
-      'email': [null, Validators.compose([
+      'username': [null, Validators.compose([
         Validators.required
       ])],
       'password': [null, Validators.compose([
@@ -85,13 +87,18 @@ export class LoginPage implements OnInit {
 
   // // //
   goToRegister() {
-    this.login.Logged();
-    console.log("ge");
-    //this.navCtrl.navigateRoot('/register');
+    this.navCtrl.navigateRoot('/register');
   }
 
   goToHome() {
-    this.navCtrl.navigateRoot('/home-results');
+    
+    this.login.login(this.onLoginForm).subscribe(res=>{
+      this.login.Store(this.onLoginForm.get('username'));
+      this.login.getcurrentuser();
+      console.log(LoginService.user);
+      //this.navCtrl.navigateRoot('/home-results');
+    });
+    // this.navCtrl.navigateRoot('/home-results');
   }
 
 }

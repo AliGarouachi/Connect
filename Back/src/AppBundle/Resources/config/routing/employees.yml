@@ -18,6 +18,11 @@ employees_edit:
     defaults: { _controller: "AppBundle:Employees:edit" }
     methods:  [GET, POST]
 
+json_employees_get_by_fos:
+    path:     /{username}/get_by_fos
+    defaults: { _controller: "AppBundle:Employees:get_by_fos" }
+    methods:  [GET, POST]
+
 employees_delete:
     path:     /{id}/delete
     defaults: { _controller: "AppBundle:Employees:delete" }

@@ -8,21 +8,21 @@
 <div class="popup-menu">
   <div class="popup-menu-overlay" [ngClass]="{'in': openMenu}"></div>
   <div class="popup-menu-panel" [ngClass]="{'in': openMenu}">
-    <div class="popup-menu-item">
+    <div class="popup-menu-item" *ngIf="user.payment" (click)="paymentForm()">
       <ion-icon name="cog" slot="middle" size="large"></ion-icon>
-      <span>Config</span>
+      <span>payment</span>
     </div>
-    <div class="popup-menu-item" (click)="test()">
+    <div class="popup-menu-item" *ngIf="user.transfert" (click)="transfertForm()">
       <ion-icon name="cog" slot="middle" size="large"></ion-icon>
-      <span>Config</span>
+      <span>Transfert</span>
     </div>
-    <div class="popup-menu-item">
+    <div class="popup-menu-item" *ngIf="user.giveaccess" (click)="accessForm()">
       <ion-icon name="beer" slot="middle" size="large"></ion-icon>
-      <span>Activities</span>
+      <span>Donner un accès</span>
     </div>
-    <div class="popup-menu-item">
+    <div class="popup-menu-item" *ngIf="user.verifyaccess" (click)="verifyForm()">
       <ion-icon name="person" slot="middle" size="large"></ion-icon>
-      <span>Settings</span>
+      <span>Verifier</span>
     </div>
   </div>
 </div>

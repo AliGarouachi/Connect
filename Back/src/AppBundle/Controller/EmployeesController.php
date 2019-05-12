@@ -5,7 +5,9 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Employees;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 /**
  * Employee controller.
  *
@@ -63,6 +65,20 @@ class EmployeesController extends Controller
             'employee' => $employee,
             'delete_form' => $deleteForm->createView(),
         ));
+    }
+    /**
+     * Finds and displays a employee entity by his fos id and return it in json.
+     *
+     */
+    public function get_by_fosAction($username)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository('AppBundle:User')->findBy(array("username"=>$username));
+        
+        $employees = $em->getRepository('AppBundle:Employees')->findBy(array("idFos"=>$user[0]->getId()));
+        $serializer=new Serializer([new ObjectNormalizer()]);
+        $employees=$serializer->normalize($employees);
+        return new JsonResponse($employees);
     }
 
     /**

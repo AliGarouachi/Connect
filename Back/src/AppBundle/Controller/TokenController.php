@@ -15,10 +15,11 @@ class TokenController extends Controller
         $this->tokenManager = $tokenManager;
     }
     public function getTokenAction()
-    {
+    {   
         $csrfToken = $this->tokenManager
             ? $this->tokenManager->getToken('authenticate')->getValue()
             : null;
+        // $_POST = json_decode(file_get_contents('php://input'), true);
         $csrfToken=array($csrfToken);
         $serializer=new Serializer([new ObjectNormalizer()]);
         $csrfToken=$serializer->normalize($csrfToken);
@@ -32,9 +33,11 @@ class TokenController extends Controller
     }
     public function loggedAction()
     {
-        return $this->render('AppBundle:Token:get_token.html.twig', array(
-            
-        ));
+        $csrfToken='Connected';
+        $csrfToken=array($csrfToken);
+        $serializer=new Serializer([new ObjectNormalizer()]);
+        $csrfToken=$serializer->normalize($_POST);
+        return new JsonResponse($csrfToken);
     }
 
 }
