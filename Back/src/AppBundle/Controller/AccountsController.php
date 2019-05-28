@@ -33,7 +33,6 @@ class AccountsController extends Controller
     public function inAction($qrcode,$amount)
     {
         $em = $this->getDoctrine()->getManager();
-
         $accounts = $em->getRepository('AppBundle:Accounts')->findBy(array("qrstring"=>$qrcode));
         $account=$accounts[0];
         $account->setAmount($account->getAmount()+$amount);

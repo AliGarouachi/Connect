@@ -3,7 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use \Datetime;
+
 /**
  * Accounts
  *
@@ -56,11 +56,6 @@ class Accounts
      */
     private $id;
 
-    function __construct($p=1) {
-        $this->receivingdate=(new DateTime('now'));
-        $this->expirationdate=(new DateTime('now'));
-        $this->expirationdate->modify('+'.$p.' month');
-    }
 
 
     /**

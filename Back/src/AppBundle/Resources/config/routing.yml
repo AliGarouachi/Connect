@@ -22,3 +22,6 @@ get_token:
 logged:
     path:     /logged
     defaults: { _controller: AppBundle:Token:logged }
+app_product:
+        resource: "@AppBundle/Resources/config/routing/product.yml"
+        prefix:   /product

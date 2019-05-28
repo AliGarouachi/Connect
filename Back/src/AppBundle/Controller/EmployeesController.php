@@ -75,7 +75,9 @@ class EmployeesController extends Controller
         $em = $this->getDoctrine()->getManager();
         $user = $em->getRepository('AppBundle:User')->findBy(array("username"=>$username));
         
-        $employees = $em->getRepository('AppBundle:Employees')->findBy(array("idFos"=>$user[0]->getId()));
+        $employees = $em->getRepository('AppBundle:Employees')->findBy(array("idfos"=>$user[0]->getId()));
+
+  
         $serializer=new Serializer([new ObjectNormalizer()]);
         $employees=$serializer->normalize($employees);
         return new JsonResponse($employees);

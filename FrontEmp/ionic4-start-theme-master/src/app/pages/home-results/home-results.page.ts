@@ -25,6 +25,7 @@ import { store, text } from '@angular/core/src/render3';
 import { User } from '../../Entity/user';
 import { LoginService } from 'src/app/Service/Login/login.service';
 import { AccountService } from 'src/app/Service/Account/account.service';
+import { ProductService } from 'src/app/Service/Product/product.service';
 @Component({
   selector: 'app-home-results',
   templateUrl: './home-results.page.html',
@@ -44,6 +45,7 @@ export class HomeResultsPage {
   amount: any;
   numberaccess: any;
   user: User = LoginService.user;
+  products: any =[];
   constructor(
     public navCtrl: NavController,
     public menuCtrl: MenuController,
@@ -56,7 +58,9 @@ export class HomeResultsPage {
     private barcodeScanner: BarcodeScanner,
     private account: AccountService,
     public loadingCtrl: LoadingController,
+    public product:ProductService,
   ) {
+    
     this.encodeData = "https://www.FreakyJolly.com";
     //Options
     this.barcodeScannerOptions = {
@@ -64,9 +68,21 @@ export class HomeResultsPage {
       showFlipCameraButton: true
     };
     event.subscribe('FormLoad', a => {
+      this.amount=null;
+      this.scannedData=null;
+      this.numberaccess=null;
       console.log('event pass');
       if (a == 0) {
         console.log('if passe');
+        this.products=[];
+        this.product.getproducts().subscribe(res=>{
+          let productsjson=JSON.parse(JSON.stringify(res.json()));
+            productsjson.forEach(element => {
+            this.products.push(JSON.parse(JSON.stringify(element)));
+            
+          });
+          
+        });
         this.Payment = true;
         this.GiveAccess = false;
         this.Transfert = false;
@@ -97,6 +113,10 @@ export class HomeResultsPage {
     });
     this.GiveAccess = true;
   }
+  addtoAddition(product)
+  {
+    this.amount+=product.price;
+  }
   giveAccess() {
     let form = {
       "Amount": this.amount,
@@ -117,25 +137,40 @@ export class HomeResultsPage {
     });
     
   }
+  verifyform()
+  {
+    if(this.amount==null)
+    {
+      return false;
+    }
+     
+    if(this.scannedData==null)
+      {return false;
+      }
+    return true;
+  }
   in() {
 
     let form = {
       "Amount": this.amount,
       "Qrstring": this.scannedData
     }
-    this.account.existAccount(form).subscribe(res => {
-      res = res.json();
-      if (res[0] == 'yes') {
-        
-        this.account.add(form);
-        this.notify("Alimentation","Le compte a été alimenter de : "+this.amount+"dt");
-      }
-      else {
-        this.notify("compte introuvable","le code scanner n'est lié a aucun compte");
+    if(this.verifyform()==true)
+    {
+      this.account.existAccount(form).subscribe(res => {
+        res = res.json();
+        if (res[0] == 'yes') {
+          
+          this.account.add(form);
+          this.notify("Alimentation","Le compte a été alimenter de : "+this.amount+"dt");
+        }
+        else {
+          this.notify("compte introuvable","le code scanner n'est lié a aucun compte");
 
-      }
-    });
-
+        }
+      });
+    }
+    
 
   }
   async notify(title,message)
@@ -279,6 +314,23 @@ export class HomeResultsPage {
     });
     return await popover.present();
   }
-
+  verifyAccess()
+  {
+    let form = {
+      "Amount": this.amount,
+      "Qrstring": this.scannedData
+    }
+    this.account.existAccount(form).subscribe(res=>{
+      res=res.json();
+      if(res[0]=='yes')
+      {
+        this.notify('Valider','');
+      }
+      else
+      {
+        this.notify('non Valider','');
+      }
+    });
+  }
 
 }

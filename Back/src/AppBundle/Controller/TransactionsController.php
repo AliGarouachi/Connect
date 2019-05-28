@@ -40,7 +40,22 @@ class TransactionsController extends Controller
         $transaction = new Transactions();
         $form = $this->createForm('AppBundle\Form\TransactionsType', $transaction);
         $form->handleRequest($request);
-
+        if ($request->getContentType() == 'json' && $request->getContent()) {
+            $data=json_decode($request->getContent(), true);
+            var_dump($data);
+            $transaction = new Accounts();
+            $transaction->setAmount($data['Amount']);
+            $transaction->setNumberaccess($data['Numberaccess']);
+            $transaction->setQrstring($data['Qrstring']);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($transaction);
+            $em->flush();
+            $csrfToken='TransactionAdded';
+            $csrfToken=array($csrfToken);
+            $serializer=new Serializer([new ObjectNormalizer()]);
+            $csrfToken=$serializer->normalize($csrfToken);
+            return new JsonResponse($csrfToken);
+        }
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($transaction);

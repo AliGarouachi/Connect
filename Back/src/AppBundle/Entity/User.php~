@@ -1,16 +1,17 @@
 <?php
-// src/AppBundle/Entity/Client.php
+// src/AppBundle/Entity/User.php
 
 namespace AppBundle\Entity;
 
-use FOS\OAuthServerBundle\Entity\Client as BaseClient;
+use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use SbS\AdminLTEBundle\Model\UserInterface as ThemeUser;
 
 /**
- * @ORM\Table("oauth2_clients")
  * @ORM\Entity
+ * @ORM\Table(name="fos_user")
  */
-class Client extends BaseClient
+class User extends BaseUser
 {
     /**
      * @ORM\Id
@@ -22,5 +23,6 @@ class Client extends BaseClient
     public function __construct()
     {
         parent::__construct();
+        // your own logic
     }
 }

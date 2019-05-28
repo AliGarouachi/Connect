@@ -33,7 +33,7 @@
       <ion-label position="floating">
         Somme a verser
       </ion-label>
-      <ion-input color="secondary" type="text" name="amount" [(ngModel)]='amount'></ion-input>
+      <ion-input color="secondary" type="number" name="amount" [(ngModel)]='amount'></ion-input>
     </ion-item>
     <ion-item no-padding class="animated fadeInUp">
       <ion-label position="floating">
@@ -51,11 +51,19 @@
 
   <ion-card class="bg-white" *ngIf="Payment">
     <h1>Addition</h1>
+    <ion-grid *ngFor="let pro of products">
+      <ion-col col-4>
+        <ion-button expand="full" color="dark" (click)="addtoAddition(pro)">
+          {{pro.name}} <br>
+          {{pro.price}} dt
+        </ion-button>
+      </ion-col>
+    </ion-grid>
     <ion-item no-padding class="animated fadeInUp">
-      <ion-label position="floating">
-        Somme a payer
-      </ion-label>
-      <ion-input color="secondary" type="number" [(ngModel)]='amount' name="amount"></ion-input>
+      <h3 *ngIf="amount">
+        Somme a payer : <br>{{ amount }}Dt
+      </h3>
+      
     </ion-item>
     <ion-button expand="full" color="dark" (click)="scanCode()" full>
       Scaner le Code
@@ -87,6 +95,9 @@
     <h1>VerifyAccess</h1>
     <ion-button expand="full" color="dark" (click)="scanCode()" full>
       Scaner le Code
+    </ion-button>
+    <ion-button expand="full" color="dark" (click)="VerifyAccess()" full>
+      Valider
     </ion-button>
   </ion-card>
   <popmenu></popmenu>
