@@ -1,9 +1,8 @@
-{% extends 'base.html.twig' %}
+{% extends '@SbSAdminLTE/Layout/base.html.twig' %}
 
-{% block body %}
+{% block page_content %}
     <h1>Account</h1>
-
-    <table>
+    <table class="table table-bordered table-hover dataTable">
         <tbody>
             <tr>
                 <th>Id</th>
@@ -31,18 +30,24 @@
             </tr>
         </tbody>
     </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('accounts_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('accounts_edit', { 'id': account.id }) }}">Edit</a>
-        </li>
-        <li>
+    <div class="col-md-2 pull-right">
+<table class ="table table-bordered text-center">
+<tbody>
+    <tr>
+    <td>
+            <a href="{{ path('accounts_index') }}" class="btn btn-info">Back to the list</a>
+            </td>
+        
+     <td> 
+            <a href="{{ path('accounts_edit', { 'id': account.id }) }}" class="btn btn-warning">Edit</a>
+            </td>
+     <td>   
             {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
+                <input type="submit" value="Delete" class="btn btn-danger ">
             {{ form_end(delete_form) }}
-        </li>
-    </ul>
+            </td>
+     </tr>   
+    </tbody>
+    </table>
+    </div>
 {% endblock %}
