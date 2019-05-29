@@ -63,4 +63,9 @@ class Services
     {
         return $this->id;
     }
+
+    public function __toString()
+    {
+        return (string) $this->getId();
+    }
 }
