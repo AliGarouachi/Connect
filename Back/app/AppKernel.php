@@ -21,6 +21,7 @@ class AppKernel extends Kernel
             new AppBundle\AppBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new Nelmio\CorsBundle\NelmioCorsBundle(),
+            new EnricoStahn\Bundle\GuzzleStereoBundle\GuzzleStereoBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
