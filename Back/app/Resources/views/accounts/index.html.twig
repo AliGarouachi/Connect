@@ -1,21 +1,40 @@
-{% extends 'base.html.twig' %}
+{% extends '@SbSAdminLTE/Layout/base.html.twig' %}
 
-{% block body %}
-    <h1>Accounts list</h1>
+{% block page_content %}
+    <h1>Accounts list</h1>             
+              <a href="{{ path('accounts_new') }}" class="btn btn-app" style="float: right;" ><i class="fa fa-plus"></i>Add Account</a>
 
-    <table>
+
+    <div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Responsive Hover Table</h3>
+
+              <div class="box-tools">
+                <div class="input-group input-group-sm" style="width: 150px;">
+                  <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
+
+                  <div class="input-group-btn">
+                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body table-responsive no-padding">
+              <table class="table table-hover">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Amount</th>
-                <th>Qrstring</th>
-                <th>Numberaccess</th>
-                <th>Expirationdate</th>
-                <th>Receivingdate</th>
+                <th>Qr code</th>
+                <th>Number access</th>
+                <th>Expiration date</th>
+                <th>Receiving date</th>
                 <th>Actions</th>
             </tr>
         </thead>
-        <tbody>
         {% for account in accounts %}
             <tr>
                 <td><a href="{{ path('accounts_show', { 'id': account.id }) }}">{{ account.id }}</a></td>
@@ -24,24 +43,36 @@
                 <td>{{ account.numberaccess }}</td>
                 <td>{% if account.expirationdate %}{{ account.expirationdate|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>{% if account.receivingdate %}{{ account.receivingdate|date('Y-m-d H:i:s') }}{% endif %}</td>
+
+                
+
                 <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('accounts_show', { 'id': account.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('accounts_edit', { 'id': account.id }) }}">edit</a>
-                        </li>
-                    </ul>
+                    <div class="btn-group">
+                  <a href="{{ path('accounts_show', { 'id': account.id }) }}" class="btn btn-primary">show</a>
+                  <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    <span class="caret"></span>
+                    <span class="sr-only">Toggle Dropdown</span>
+                  </button>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a href="{{ path('accounts_show', { 'id': account.id }) }}" >show</a></li>
+                    <li><a href="{{ path('accounts_edit', { 'id': account.id }) }}" >edit</a></li>
+                  </ul>
+                </div>
                 </td>
             </tr>
         {% endfor %}
-        </tbody>
-    </table>
+        </tbody></table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+      </div>
+        
+        
 
-    <ul>
-        <li>
-            <a href="{{ path('accounts_new') }}">Create a new account</a>
-        </li>
-    </ul>
+    
+            
+        
+    
 {% endblock %}
