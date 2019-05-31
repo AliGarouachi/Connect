@@ -38,8 +38,23 @@ class EmployeesController extends Controller
         $employee = new Employees();
         $form = $this->createForm('AppBundle\Form\EmployeesType', $employee);
         $form->handleRequest($request);
-
+        $fosform = $this->createForm('AppBundle\Form\EmployeesType', $employee);
+        $fosform->handleRequest($request);
+        $em = $this->getDoctrine()->getManager();
+        $services = $em->getRepository('AppBundle:Services')->findAll();
         if ($form->isSubmitted() && $form->isValid()) {
+            $lastuser = $em->getRepository('AppBundle:FosUser')->findOneBy([], ['id' => 'desc']);
+            $employee->setIdfos($lastuser);
+            $service = $em->getRepository('AppBundle:Services')->findBy(array("id"=>$_POST['idservice']));
+            $employee->setIdservice($service[0]);
+            if($_POST['giveaccess'])
+                $employee->setGiveaccess(1);
+            if($_POST['payment'])
+                $employee->setPayment(1);
+            if($_POST['transfert'])
+                $employee->setTransfert(1);
+            if($_POST['verifyaccess'])
+                $employee->setVerifyaccess(1);
             $em = $this->getDoctrine()->getManager();
             $em->persist($employee);
             $em->flush();
@@ -50,6 +65,7 @@ class EmployeesController extends Controller
         return $this->render('employees/new.html.twig', array(
             'employee' => $employee,
             'form' => $form->createView(),
+            'services'=>$services,
         ));
     }
 

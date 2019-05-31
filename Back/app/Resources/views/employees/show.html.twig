@@ -23,19 +23,46 @@
             </tr>
             <tr>
                 <th>Giveaccess</th>
-                <td>{{ employee.giveaccess }}</td>
+                <td>
+                    {% if employee.giveaccess %}
+                        oui
+                    {% else %}
+                        non
+                    {% endif %}
+                </td>
             </tr>
             <tr>
                 <th>Payment</th>
-                <td>{{ employee.payment }}</td>
+                <td>
+                
+                {% if employee.payment %}
+                    oui
+                {% else %}
+                    non
+                {% endif %}
+                
+                </td>
             </tr>
             <tr>
                 <th>Transfert</th>
-                <td>{{ employee.transfert }}</td>
+                <td>
+                    {% if employee.transfert==1 %}
+                        oui
+                    {% else %}
+                        non
+                    {% endif %}
+                </td>
             </tr>
             <tr>
                 <th>Verifyaccess</th>
-                <td>{{ employee.verifyaccess }}</td>
+                <td>
+                    {% if employee.verifyaccess %}
+                        oui
+                    {% else %}
+                        non
+                    {% endif %}
+                
+                </td>
             </tr>
         </tbody>
     </table>

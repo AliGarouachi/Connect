@@ -12,6 +12,12 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Employees
 {
+    function __construct() {
+        $this->giveaccess=0;
+        $this->payment=0;
+        $this->transfert=0;
+        $this->verifyaccess=0;
+    }
     /**
      * @var string
      *

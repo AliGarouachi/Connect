@@ -23,12 +23,12 @@ class TransactionsController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $transactions = $em->getRepository('AppBundle:Transactions')->findAll();
-        $serializer=new Serializer([new ObjectNormalizer()]);
-        $transactions=$serializer->normalize($transactions);
-        return new JsonResponse($transactions);
-        // return $this->render('transactions/index.html.twig', array(
-        //     'transactions' => $transactions,
-        // ));
+        // $serializer=new Serializer([new ObjectNormalizer()]);
+        // $transactions=$serializer->normalize($transactions);
+        // return new JsonResponse($transactions);
+        return $this->render('transactions/index.html.twig', array(
+            'transactions' => $transactions,
+        ));
     }
 
     /**

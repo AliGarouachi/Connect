@@ -56,10 +56,11 @@ class Accounts
      */
     private $id;
 
-    function __construct($p=1) {
-        $this->receivingdate=(new DateTime('now'));
-        $this->expirationdate=(new DateTime('now'));
-        $this->expirationdate->modify('+'.$p.' month');
+    function __construct() {
+        $employee->giveaccess=0;
+        $employee->payment=0;
+        $employee->transfert=0;
+        $employee->verifyaccess=0;
     }
 
 

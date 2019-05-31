@@ -5,6 +5,54 @@
 {% form_theme form '@SbSAdminLTE/Layout/base.html.twig' %}
     {{ form_start(form) }}
         {{ form_widget(form) }}
+       <div class="form-group">
+            <label>Service</label>
+            <select required class="form-control select2 select2-hidden-accessible" name="idservice" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                <option></option>
+                {% for service in services %}
+                    <option value={{service.id}}>{{service.lable}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <h3>Les prévilège : </h3>
+        <div class="form-group">
+         <label>
+            <div class="icheckbox_minimal-blue disabled" aria-checked="false" aria-disabled="true" style="position: relative;">
+                <input class="minimal" type="checkbox" class="minimal" name="giveaccess">
+            
+                donner un accès
+            </div>
+        </label>
+        </div>
+
+        <div class="form-group">
+        
+        <label>
+            <div class="icheckbox_minimal-blue disabled" aria-checked="false" aria-disabled="true" style="position: relative;">
+                <input class="minimal" type="checkbox" class="minimal" name="payment">
+            
+            payment
+            </div>
+        </label>
+         </div>
+        <div class="form-group">
+            <label>
+                <div class="icheckbox_minimal-blue disabled" aria-checked="false" aria-disabled="true" style="position: relative;">
+                    <input class="minimal" type="checkbox" class="minimal" name="transfert">
+                
+                transfert
+                </div>
+            </label>
+        </div>
+        <div class="form-group">
+            <label>
+                <div class="icheckbox_minimal-blue disabled" aria-checked="false" aria-disabled="true" style="position: relative;">
+                    <input class="minimal" type="checkbox" class="minimal" name="verifyaccess">
+                
+                verifyaccess
+                </div>
+            </label>
+        </div>
         <input type="submit" value="Create" class="btn btn-success" style="float: right;"/>
     {{ form_end(form) }}
 

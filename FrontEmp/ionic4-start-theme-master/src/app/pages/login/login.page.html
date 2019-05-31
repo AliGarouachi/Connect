@@ -41,54 +41,19 @@
         </p>
     </form>
 
-    <p text-right tappable (click)="forgotPass()" class="paz">
-      <ion-text color="light">
-        <strong>Forgot Pass?</strong>
-      </ion-text>
-    </p>
-
     <div>
       <ion-button icon-left size="medium" expand="full" shape="round" color="dark" (click)="goToHome()" [disabled]="!onLoginForm.valid" tappable>
         <ion-icon name="log-in"></ion-icon>
         Signin
       </ion-button>
 
-      <p text-center>
-        <ion-text color="light">
-          Or Signin with:
-        </ion-text>
-      </p>
+      
 
-      <ion-grid class="btn-group">
-        <ion-row>
-          <ion-col size="4">
-            <ion-button shape="round" expand="full" color="secondary">
-              <ion-icon slot="icon-only" name="logo-facebook"></ion-icon>
-            </ion-button>
-          </ion-col>
-          <ion-col size="4">
-            <ion-button shape="round" expand="full" color="secondary">
-              <ion-icon slot="icon-only" name="logo-twitter"></ion-icon>
-            </ion-button>
-          </ion-col>
-          <ion-col size="4">
-            <ion-button shape="round" expand="full" color="secondary">
-              <ion-icon slot="icon-only" name="logo-googleplus"></ion-icon>
-            </ion-button>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
+      
 
     </div>
 
-    <!-- Other links -->
-    <div text-center margin-top>
-      <span (click)="goToRegister()" class="paz" tappable>
-        <ion-text color="light">
-          New here? <strong>Sign Up</strong>
-        </ion-text>
-      </span>
-    </div>
+    
 
   </div>
 </ion-content>
