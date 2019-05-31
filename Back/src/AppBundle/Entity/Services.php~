@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Services
  *
- * @ORM\Table(name="services")
+ * @ORM\Table(name="services", indexes={@ORM\Index(name="fk_Etab", columns={"idetab"})})
  * @ORM\Entity
  */
 class Services
@@ -28,39 +28,16 @@ class Services
      */
     private $id;
 
-
-
     /**
-     * Set lable
+     * @var \AppBundle\Entity\Establishment
      *
-     * @param string $lable
-     *
-     * @return Services
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Establishment")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="idetab", referencedColumnName="Id")
+     * })
      */
-    public function setLable($lable)
-    {
-        $this->lable = $lable;
+    private $idetab;
 
-        return $this;
-    }
 
-    /**
-     * Get lable
-     *
-     * @return string
-     */
-    public function getLable()
-    {
-        return $this->lable;
-    }
-
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
 }
+

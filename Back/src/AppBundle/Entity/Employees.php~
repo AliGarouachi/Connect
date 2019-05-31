@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Employees
  *
- * @ORM\Table(name="employees", indexes={@ORM\Index(name="FK_Services", columns={"IdService"}), @ORM\Index(name="IDX_BA82C300B93A24E9", columns={"idFos"})})
+ * @ORM\Table(name="employees", indexes={@ORM\Index(name="FK_Services", columns={"IdService"}), @ORM\Index(name="IDX_BA82C300B93A24E9", columns={"idFos"}), @ORM\Index(name="Fk_Etablis", columns={"idetab"})})
  * @ORM\Entity
  */
 class Employees
@@ -79,6 +79,7 @@ class Employees
      * })
      */
     private $idfos;
+
     /**
      * @var \AppBundle\Entity\Services
      *
@@ -89,231 +90,16 @@ class Employees
      */
     private $idservice;
 
-
-
     /**
-     * Set firstName
+     * @var \AppBundle\Entity\Establishment
      *
-     * @param string $firstName
-     *
-     * @return Employees
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Establishment")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="idetab", referencedColumnName="Id")
+     * })
      */
-    public function setFirstName($firstName)
-    {
-        $this->firstName = $firstName;
+    private $idetab;
 
-        return $this;
-    }
 
-    /**
-     * Get firstName
-     *
-     * @return string
-     */
-    public function getFirstName()
-    {
-        return $this->firstName;
-    }
-
-    /**
-     * Set lastName
-     *
-     * @param string $lastName
-     *
-     * @return Employees
-     */
-    public function setLastName($lastName)
-    {
-        $this->lastName = $lastName;
-
-        return $this;
-    }
-
-    /**
-     * Get lastName
-     *
-     * @return string
-     */
-    public function getLastName()
-    {
-        return $this->lastName;
-    }
-
-    /**
-     * Set cin
-     *
-     * @param string $cin
-     *
-     * @return Employees
-     */
-    public function setCin($cin)
-    {
-        $this->cin = $cin;
-
-        return $this;
-    }
-
-    /**
-     * Get cin
-     *
-     * @return string
-     */
-    public function getCin()
-    {
-        return $this->cin;
-    }
-
-    /**
-     * Set giveaccess
-     *
-     * @param integer $giveaccess
-     *
-     * @return Employees
-     */
-    public function setGiveaccess($giveaccess)
-    {
-        $this->giveaccess = $giveaccess;
-
-        return $this;
-    }
-
-    /**
-     * Get giveaccess
-     *
-     * @return integer
-     */
-    public function getGiveaccess()
-    {
-        return $this->giveaccess;
-    }
-
-    /**
-     * Set payment
-     *
-     * @param integer $payment
-     *
-     * @return Employees
-     */
-    public function setPayment($payment)
-    {
-        $this->payment = $payment;
-
-        return $this;
-    }
-
-    /**
-     * Get payment
-     *
-     * @return integer
-     */
-    public function getPayment()
-    {
-        return $this->payment;
-    }
-
-    /**
-     * Set transfert
-     *
-     * @param integer $transfert
-     *
-     * @return Employees
-     */
-    public function setTransfert($transfert)
-    {
-        $this->transfert = $transfert;
-
-        return $this;
-    }
-
-    /**
-     * Get transfert
-     *
-     * @return integer
-     */
-    public function getTransfert()
-    {
-        return $this->transfert;
-    }
-
-    /**
-     * Set verifyaccess
-     *
-     * @param integer $verifyaccess
-     *
-     * @return Employees
-     */
-    public function setVerifyaccess($verifyaccess)
-    {
-        $this->verifyaccess = $verifyaccess;
-
-        return $this;
-    }
-
-    /**
-     * Get verifyaccess
-     *
-     * @return integer
-     */
-    public function getVerifyaccess()
-    {
-        return $this->verifyaccess;
-    }
-
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Set idfos
-     *
-     * @param \AppBundle\Entity\FosUser $idfos
-     *
-     * @return Employees
-     */
-    public function setIdfos(\AppBundle\Entity\FosUser $idfos = null)
-    {
-        $this->idfos = $idfos;
-
-        return $this;
-    }
-
-    /**
-     * Get idfos
-     *
-     * @return \AppBundle\Entity\FosUser
-     */
-    public function getIdfos()
-    {
-        return $this->idfos;
-    }
-
-    /**
-     * Set idservice
-     *
-     * @param \AppBundle\Entity\Services $idservice
-     *
-     * @return Employees
-     */
-    public function setIdservice(\AppBundle\Entity\Services $idservice = null)
-    {
-        $this->idservice = $idservice;
-
-        return $this;
-    }
-
-    /**
-     * Get idservice
-     *
-     * @return \AppBundle\Entity\Services
-     */
-    public function getIdservice()
-    {
-        return $this->idservice;
-    }
 }
+

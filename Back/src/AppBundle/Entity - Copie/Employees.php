@@ -7,11 +7,11 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Employees
  *
- * @ORM\Table(name="employees", indexes={@ORM\Index(name="FK_Services", columns={"IdService"}), @ORM\Index(name="IDX_BA82C300B93A24E9", columns={"idFos"}), @ORM\Index(name="Fk_Etablis", columns={"idetab"})})
+ * @ORM\Table(name="employees", indexes={@ORM\Index(name="FK_Services", columns={"IdService"}), @ORM\Index(name="IDX_BA82C300B93A24E9", columns={"idFos"})})
  * @ORM\Entity
  */
 class Employees
-{   
+{
     function __construct() {
         $this->giveaccess=0;
         $this->payment=0;
@@ -85,7 +85,6 @@ class Employees
      * })
      */
     private $idfos;
-
     /**
      * @var \AppBundle\Entity\Services
      *
@@ -96,18 +95,9 @@ class Employees
      */
     private $idservice;
 
-    /**
-     * @var \AppBundle\Entity\Establishment
-     *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Establishment")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idetab", referencedColumnName="Id")
-     * })
-     */
-    private $idetab;
 
 
-
+    
     /**
      * Set firstName
      *
@@ -334,27 +324,5 @@ class Employees
         return $this->idservice;
     }
 
-    /**
-     * Set idetab
-     *
-     * @param \AppBundle\Entity\Establishment $idetab
-     *
-     * @return Employees
-     */
-    public function setIdetab(\AppBundle\Entity\Establishment $idetab = null)
-    {
-        $this->idetab = $idetab;
-
-        return $this;
-    }
-
-    /**
-     * Get idetab
-     *
-     * @return \AppBundle\Entity\Establishment
-     */
-    public function getIdetab()
-    {
-        return $this->idetab;
-    }
+    
 }

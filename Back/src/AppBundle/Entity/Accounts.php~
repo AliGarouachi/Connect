@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Accounts
  *
- * @ORM\Table(name="accounts")
+ * @ORM\Table(name="accounts", indexes={@ORM\Index(name="fk_e", columns={"idetab"})})
  * @ORM\Entity
  */
 class Accounts
@@ -56,135 +56,16 @@ class Accounts
      */
     private $id;
 
-
-
     /**
-     * Set amount
+     * @var \AppBundle\Entity\Establishment
      *
-     * @param integer $amount
-     *
-     * @return Accounts
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Establishment")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="idetab", referencedColumnName="Id")
+     * })
      */
-    public function setAmount($amount)
-    {
-        $this->amount = $amount;
+    private $idetab;
 
-        return $this;
-    }
 
-    /**
-     * Get amount
-     *
-     * @return integer
-     */
-    public function getAmount()
-    {
-        return $this->amount;
-    }
-
-    /**
-     * Set qrstring
-     *
-     * @param string $qrstring
-     *
-     * @return Accounts
-     */
-    public function setQrstring($qrstring)
-    {
-        $this->qrstring = $qrstring;
-
-        return $this;
-    }
-
-    /**
-     * Get qrstring
-     *
-     * @return string
-     */
-    public function getQrstring()
-    {
-        return $this->qrstring;
-    }
-
-    /**
-     * Set numberaccess
-     *
-     * @param integer $numberaccess
-     *
-     * @return Accounts
-     */
-    public function setNumberaccess($numberaccess)
-    {
-        $this->numberaccess = $numberaccess;
-
-        return $this;
-    }
-
-    /**
-     * Get numberaccess
-     *
-     * @return integer
-     */
-    public function getNumberaccess()
-    {
-        return $this->numberaccess;
-    }
-
-    /**
-     * Set expirationdate
-     *
-     * @param \DateTime $expirationdate
-     *
-     * @return Accounts
-     */
-    public function setExpirationdate($expirationdate)
-    {
-        $this->expirationdate = $expirationdate;
-
-        return $this;
-    }
-
-    /**
-     * Get expirationdate
-     *
-     * @return \DateTime
-     */
-    public function getExpirationdate()
-    {
-        return $this->expirationdate;
-    }
-
-    /**
-     * Set receivingdate
-     *
-     * @param \DateTime $receivingdate
-     *
-     * @return Accounts
-     */
-    public function setReceivingdate($receivingdate)
-    {
-        $this->receivingdate = $receivingdate;
-
-        return $this;
-    }
-
-    /**
-     * Get receivingdate
-     *
-     * @return \DateTime
-     */
-    public function getReceivingdate()
-    {
-        return $this->receivingdate;
-    }
-
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
 }
+

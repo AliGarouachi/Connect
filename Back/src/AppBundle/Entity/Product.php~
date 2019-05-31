@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Product
  *
- * @ORM\Table(name="product")
+ * @ORM\Table(name="product", indexes={@ORM\Index(name="fk_Etabliss", columns={"idetab"})})
  * @ORM\Entity
  */
 class Product
@@ -42,87 +42,16 @@ class Product
      */
     private $id;
 
-
-
     /**
-     * Set name
+     * @var \AppBundle\Entity\Establishment
      *
-     * @param string $name
-     *
-     * @return Product
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Establishment")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="idetab", referencedColumnName="Id")
+     * })
      */
-    public function setName($name)
-    {
-        $this->name = $name;
+    private $idetab;
 
-        return $this;
-    }
 
-    /**
-     * Get name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * Set price
-     *
-     * @param float $price
-     *
-     * @return Product
-     */
-    public function setPrice($price)
-    {
-        $this->price = $price;
-
-        return $this;
-    }
-
-    /**
-     * Get price
-     *
-     * @return float
-     */
-    public function getPrice()
-    {
-        return $this->price;
-    }
-
-    /**
-     * Set qt
-     *
-     * @param integer $qt
-     *
-     * @return Product
-     */
-    public function setQt($qt)
-    {
-        $this->qt = $qt;
-
-        return $this;
-    }
-
-    /**
-     * Get qt
-     *
-     * @return integer
-     */
-    public function getQt()
-    {
-        return $this->qt;
-    }
-
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
 }
+

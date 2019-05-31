@@ -61,10 +61,13 @@ export class HomeResultsPage {
     public product:ProductService,
   ) {
     setInterval(() => {
-      
+      this.getAmount();
     },1000);
   }
-  
+  getAmount()
+  {
+    
+  }
   
   async notify(title,message)
   {

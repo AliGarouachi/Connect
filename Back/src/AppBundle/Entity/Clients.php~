@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Clients
  *
- * @ORM\Table(name="clients", indexes={@ORM\Index(name="Fk_Account", columns={"Id_Account"}), @ORM\Index(name="IDX_C82E74B93A24E9", columns={"idFos"})})
+ * @ORM\Table(name="clients", indexes={@ORM\Index(name="Fk_Account", columns={"Id_Account"}), @ORM\Index(name="IDX_C82E74B93A24E9", columns={"idFos"}), @ORM\Index(name="Fk_Etabli", columns={"idetab"})})
  * @ORM\Entity
  */
 class Clients
@@ -69,159 +69,16 @@ class Clients
      */
     private $idAccount;
 
-
-
     /**
-     * Set lastName
+     * @var \AppBundle\Entity\Establishment
      *
-     * @param string $lastName
-     *
-     * @return Clients
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Establishment")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="idetab", referencedColumnName="Id")
+     * })
      */
-    public function setLastName($lastName)
-    {
-        $this->lastName = $lastName;
+    private $idetab;
 
-        return $this;
-    }
 
-    /**
-     * Get lastName
-     *
-     * @return string
-     */
-    public function getLastName()
-    {
-        return $this->lastName;
-    }
-
-    /**
-     * Set firstName
-     *
-     * @param string $firstName
-     *
-     * @return Clients
-     */
-    public function setFirstName($firstName)
-    {
-        $this->firstName = $firstName;
-
-        return $this;
-    }
-
-    /**
-     * Get firstName
-     *
-     * @return string
-     */
-    public function getFirstName()
-    {
-        return $this->firstName;
-    }
-
-    /**
-     * Set cin
-     *
-     * @param string $cin
-     *
-     * @return Clients
-     */
-    public function setCin($cin)
-    {
-        $this->cin = $cin;
-
-        return $this;
-    }
-
-    /**
-     * Get cin
-     *
-     * @return string
-     */
-    public function getCin()
-    {
-        return $this->cin;
-    }
-
-    /**
-     * Set passport
-     *
-     * @param string $passport
-     *
-     * @return Clients
-     */
-    public function setPassport($passport)
-    {
-        $this->passport = $passport;
-
-        return $this;
-    }
-
-    /**
-     * Get passport
-     *
-     * @return string
-     */
-    public function getPassport()
-    {
-        return $this->passport;
-    }
-
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Set idfos
-     *
-     * @param \AppBundle\Entity\FosUser $idfos
-     *
-     * @return Clients
-     */
-    public function setIdfos(\AppBundle\Entity\FosUser $idfos = null)
-    {
-        $this->idfos = $idfos;
-
-        return $this;
-    }
-
-    /**
-     * Get idfos
-     *
-     * @return \AppBundle\Entity\FosUser
-     */
-    public function getIdfos()
-    {
-        return $this->idfos;
-    }
-
-    /**
-     * Set idAccount
-     *
-     * @param \AppBundle\Entity\Accounts $idAccount
-     *
-     * @return Clients
-     */
-    public function setIdAccount(\AppBundle\Entity\Accounts $idAccount = null)
-    {
-        $this->idAccount = $idAccount;
-
-        return $this;
-    }
-
-    /**
-     * Get idAccount
-     *
-     * @return \AppBundle\Entity\Accounts
-     */
-    public function getIdAccount()
-    {
-        return $this->idAccount;
-    }
 }
+

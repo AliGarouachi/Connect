@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Transactions
  *
- * @ORM\Table(name="transactions", indexes={@ORM\Index(name="FK_Client", columns={"idClient"}), @ORM\Index(name="FK_Employee", columns={"idEmployee"}), @ORM\Index(name="Fk_Etablissement", columns={"idetab"})})
+ * @ORM\Table(name="transactions", indexes={@ORM\Index(name="FK_Client", columns={"idClient"}), @ORM\Index(name="FK_Employee", columns={"idEmployee"})})
  * @ORM\Entity
  */
 class Transactions
@@ -54,16 +54,6 @@ class Transactions
      * })
      */
     private $idemployee;
-
-    /**
-     * @var \AppBundle\Entity\Establishment
-     *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Establishment")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idetab", referencedColumnName="Id")
-     * })
-     */
-    private $idetab;
 
 
 
@@ -171,29 +161,5 @@ class Transactions
     public function getIdemployee()
     {
         return $this->idemployee;
-    }
-
-    /**
-     * Set idetab
-     *
-     * @param \AppBundle\Entity\Establishment $idetab
-     *
-     * @return Transactions
-     */
-    public function setIdetab(\AppBundle\Entity\Establishment $idetab = null)
-    {
-        $this->idetab = $idetab;
-
-        return $this;
-    }
-
-    /**
-     * Get idetab
-     *
-     * @return \AppBundle\Entity\Establishment
-     */
-    public function getIdetab()
-    {
-        return $this->idetab;
     }
 }

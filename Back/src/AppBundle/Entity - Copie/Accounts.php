@@ -3,21 +3,15 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use \Datetime;
 /**
  * Accounts
  *
- * @ORM\Table(name="accounts", indexes={@ORM\Index(name="fk_e", columns={"idetab"})})
+ * @ORM\Table(name="accounts")
  * @ORM\Entity
  */
 class Accounts
 {
-    function __construct() {
-        $employee->giveaccess=0;
-        $employee->payment=0;
-        $employee->transfert=0;
-        $employee->verifyaccess=0;
-    }
     /**
      * @var integer
      *
@@ -62,16 +56,12 @@ class Accounts
      */
     private $id;
 
-    /**
-     * @var \AppBundle\Entity\Establishment
-     *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Establishment")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idetab", referencedColumnName="Id")
-     * })
-     */
-    private $idetab;
-
+    function __construct() {
+        $employee->giveaccess=0;
+        $employee->payment=0;
+        $employee->transfert=0;
+        $employee->verifyaccess=0;
+    }
 
 
     /**
@@ -202,29 +192,5 @@ class Accounts
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set idetab
-     *
-     * @param \AppBundle\Entity\Establishment $idetab
-     *
-     * @return Accounts
-     */
-    public function setIdetab(\AppBundle\Entity\Establishment $idetab = null)
-    {
-        $this->idetab = $idetab;
-
-        return $this;
-    }
-
-    /**
-     * Get idetab
-     *
-     * @return \AppBundle\Entity\Establishment
-     */
-    public function getIdetab()
-    {
-        return $this->idetab;
     }
 }

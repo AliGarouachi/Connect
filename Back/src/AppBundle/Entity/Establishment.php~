@@ -5,31 +5,24 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Admin
+ * Establishment
  *
- * @ORM\Table(name="admin", indexes={@ORM\Index(name="IDX_880E0D76B93A24E9", columns={"idFos"})})
+ * @ORM\Table(name="establishment", indexes={@ORM\Index(name="fk_fos", columns={"idFos"})})
  * @ORM\Entity
  */
-class Admin
+class Establishment
 {
     /**
      * @var string
      *
-     * @ORM\Column(name="password", type="string", length=255, nullable=false)
+     * @ORM\Column(name="Name", type="string", length=500, nullable=false)
      */
-    private $password;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="login", type="string", length=255, nullable=false)
-     */
-    private $login;
+    private $name;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="id", type="integer")
+     * @ORM\Column(name="Id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
