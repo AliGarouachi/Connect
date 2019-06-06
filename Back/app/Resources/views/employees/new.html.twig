@@ -1,5 +1,23 @@
 {% extends '@SbSAdminLTE/Layout/base.html.twig' %}
-
+{% block title %}Employee creation{% endblock %}
+{% block admin_lte_logo %}
+                    <a href="" class="logo">
+                        <span class="logo-mini"><b>C</b>NT</span>
+                        <span class="logo-lg"><b>C</b>onnecti</span>
+                    </a>
+{% endblock %}
+{% block admin_lte_sidebar %}
+ 
+<ul class="sidebar-menu tree" data-widget="tree">
+        <li class="header">MAIN NAVIGATION</li>
+        <li><a href="{{ path('product_index') }}"><i class="fa fa-product-hunt"></i> <span>Products</span></a></li>
+        <li><a href="{{ path('employees_index') }}"><i class="fa fa-users text-yellow"></i> <span>Employees</span></a></li>
+        <li><a href="{{ path('transactions_index') }}"><i class="fa fa-credit-card-alt text-green"></i> <span>Transactions</span></a></li>
+        <li><a href="{{ path('clients_index') }}"><i class="fa fa-user-circle-o text-aqua"></i> <span>Clients</span></a></li>
+        <li><a href="{{ path('accounts_index') }}"><i class="fa fa-circle-o text-red    " aria-hidden="true"></i> <span>Accounts</span></a></li>
+                   
+{% endblock %}
+{% block header_content %}{% endblock %}
 {% block page_content %}
     <h1>Employee creation</h1>
 {% form_theme form '@SbSAdminLTE/Layout/base.html.twig' %}

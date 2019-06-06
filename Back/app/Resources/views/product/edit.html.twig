@@ -1,5 +1,5 @@
 {% extends '@SbSAdminLTE/Layout/base.html.twig' %}
-{% block title %}Employee edit{% endblock %}
+{% block title %}Edit Product{% endblock %}
 {% block admin_lte_logo %}
                     <a href="" class="logo">
                         <span class="logo-mini"><b>C</b>NT</span>
@@ -19,7 +19,7 @@
 {% endblock %}
 {% block header_content %}{% endblock %}
 {% block page_content %}
-    <h1>Employee edit</h1>
+    <h1>Product edit</h1>
 
     {{ form_start(edit_form) }}
         {{ form_widget(edit_form) }}
@@ -32,14 +32,15 @@
 <tbody>
     <tr>
     <td>
-            <a href="{{ path('employees_index') }}" class="btn btn-info">Back to the list</a>
-        </td>
+            <a href="{{ path('product_index') }}" class="btn btn-info">Back to the list</a>
+    </td>
     <td>
             {{ form_start(delete_form) }}
                 <input type="submit" value="Delete" class="btn btn-danger">
             {{ form_end(delete_form) }}
-        </td>
+    </td>
 </tbody>
 </table>
 </div>
+        
 {% endblock %}
