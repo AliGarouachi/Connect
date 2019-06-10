@@ -1,11 +1,12 @@
 {% extends '@SbSAdminLTE/Layout/base.html.twig' %}
-{% block title %}Employee edit{% endblock %}
+{% block title %}Add product{% endblock %}
 {% block admin_lte_logo %}
                     <a href="" class="logo">
                         <span class="logo-mini"><b>C</b>NT</span>
                         <span class="logo-lg"><b>C</b>onnecti</span>
                     </a>
 {% endblock %}
+
 {% block admin_lte_sidebar %}
  
 <ul class="sidebar-menu tree" data-widget="tree">
@@ -19,27 +20,14 @@
 {% endblock %}
 {% block header_content %}{% endblock %}
 {% block page_content %}
-    <h1>Employee edit</h1>
+    <h1>Product creation</h1>
 
-    {{ form_start(edit_form) }}
-        {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" class="btn btn-warning" style="float: right;"/>
-    {{ form_end(edit_form) }}
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <input type="submit" value="Create" class="btn btn-success" style="float: right;"/>
+    {{ form_end(form) }}
 
-    <br>
-    <div class="col-md-2 pull-left">
-<table class ="table table-bordered text-center">
-<tbody>
-    <tr>
-    <td>
-            <a href="{{ path('employees_index') }}" class="btn btn-info">Back to the list</a>
-        </td>
-    <td>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete" class="btn btn-danger">
-            {{ form_end(delete_form) }}
-        </td>
-</tbody>
-</table>
-</div>
+    
+            <a href="{{ path('product_index') }}" class="btn btn-info">Back to the list</a>
+        
 {% endblock %}
