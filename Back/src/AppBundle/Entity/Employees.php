@@ -357,4 +357,8 @@ class Employees
     {
         return $this->idetab;
     }
+    public function __toString()
+    {
+        return $this->getFirstName();
+    }
 }

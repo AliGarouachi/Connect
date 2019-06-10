@@ -12,11 +12,15 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Accounts
 {
-    function __construct() {
-        $employee->giveaccess=0;
-        $employee->payment=0;
-        $employee->transfert=0;
-        $employee->verifyaccess=0;
+    public function __construct($period = 1)
+    {
+        $this->receivingdate = new \DateTime();
+        $this->expirationdate = new \DateTime();
+        if($this->expirationdate->format('m')!=12)
+            $this->expirationdate->setDate($this->expirationdate->format('Y'), $this->expirationdate->format('m')+$period, $this->expirationdate->format('d'));
+        else
+            $this->expirationdate->setDate($this->expirationdate->format('Y')+1, $period, $this->expirationdate->format('d'));
+            
     }
     /**
      * @var integer
@@ -226,5 +230,9 @@ class Accounts
     public function getIdetab()
     {
         return $this->idetab;
+    }
+    public function __toString()
+    {
+        return $this->getQrstring();
     }
 }

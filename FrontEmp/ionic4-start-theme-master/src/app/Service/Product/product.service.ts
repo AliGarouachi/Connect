@@ -17,6 +17,6 @@ export class ProductService {
   getproducts()
   {
     console.log('good');
-    return this.http.get('http://192.168.1.9/Connect/Connect/Back/web/app_dev.php/product');
+    return this.http.get('http://192.168.43.15/Connect/Connect/Back/web/app_dev.php/product');
   }
 }

@@ -8,6 +8,11 @@ transactions_show:
     defaults: { _controller: "AppBundle:Transactions:show" }
     methods:  GET
 
+transactions_getbypersonnel:
+    path:     /personnel/{id}
+    defaults: { _controller: "AppBundle:Transactions:getbypersonnel" }
+    methods:  GET
+
 transactions_new:
     path:     /new
     defaults: { _controller: "AppBundle:Transactions:new" }

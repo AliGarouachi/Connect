@@ -34,7 +34,7 @@ class TokenController extends Controller
         
     }
     public function loggedAction()
-    {
+    {   
         $csrfToken='Connected';
         $csrfToken=array($csrfToken);
         $serializer=new Serializer([new ObjectNormalizer()]);

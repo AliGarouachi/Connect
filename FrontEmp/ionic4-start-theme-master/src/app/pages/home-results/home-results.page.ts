@@ -26,6 +26,7 @@ import { User } from '../../Entity/user';
 import { LoginService } from 'src/app/Service/Login/login.service';
 import { AccountService } from 'src/app/Service/Account/account.service';
 import { ProductService } from 'src/app/Service/Product/product.service';
+import { TransactionService } from 'src/app/Service/Transaction/transaction.service';
 @Component({
   selector: 'app-home-results',
   templateUrl: './home-results.page.html',
@@ -59,6 +60,7 @@ export class HomeResultsPage {
     private account: AccountService,
     public loadingCtrl: LoadingController,
     public product:ProductService,
+    public transaction:TransactionService,
   ) {
     
     this.encodeData = "https://www.FreakyJolly.com";
@@ -316,21 +318,22 @@ export class HomeResultsPage {
   }
   verifyAccess()
   {
-    let form = {
-      "Amount": this.amount,
-      "Qrstring": this.scannedData
-    }
-    this.account.existAccount(form).subscribe(res=>{
-      res=res.json();
-      if(res[0]=='yes')
-      {
-        this.notify('Valider','');
-      }
-      else
-      {
-        this.notify('non Valider','');
-      }
-    });
+    // let form = {
+    //   "Amount": this.amount,
+    //   "Qrstring": this.scannedData
+    // }
+    // this.account.existAccount(form).subscribe(res=>{
+    //   res=res.json();
+    //   if(res[0]=='yes')
+    //   {
+    //     this.notify('Valider','');
+    //   }
+    //   else
+    //   {
+    //     this.notify('non Valider','');
+    //   }
+    // });
+
   }
 
 }
