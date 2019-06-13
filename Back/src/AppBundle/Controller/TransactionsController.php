@@ -59,12 +59,12 @@ class TransactionsController extends Controller
         $form->handleRequest($request);
         if ($request->getContentType() == 'json' && $request->getContent()) {
             $data=json_decode($request->getContent(), true);
-            var_dump($data);
-            $transaction = new Accounts();
-            $transaction->setAmount($data['Amount']);
-            $transaction->setNumberaccess($data['Numberaccess']);
-            $transaction->setQrstring($data['Qrstring']);
+            $transaction = new transactions();
+            $transaction->setAmount($data['amount']);
             $em = $this->getDoctrine()->getManager();
+            $employee = $em->getRepository('AppBundle:Employees')->findBy(array("id"=>$data['idemployee']));
+            $transaction->setIdemployee($employee[0]);
+            $transaction->setQrstring($data['qrstring']);
             $em->persist($transaction);
             $em->flush();
             $csrfToken='TransactionAdded';
@@ -77,7 +77,8 @@ class TransactionsController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($transaction);
             $em->flush();
-
+            var_dump($_POST);
+            die;
             return $this->redirectToRoute('transactions_show', array('id' => $transaction->getId()));
         }
 

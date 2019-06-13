@@ -13,12 +13,12 @@ export class AccountService {
               {  }
   add(form)
   {
-    this.http.get('http://192.168.43.15/Connect/Connect/Back/web/app_dev.php/accounts/'+form['Qrstring']+'/'+form['Amount']+'/in')
+    this.http.get('http://192.168.1.3/Connect/Connect/Back/web/app_dev.php/accounts/'+form['Qrstring']+'/'+form['Amount']+'/in')
     .subscribe(res=>{console.log(res)});
   }
   getpayed(form)
   {
-    this.http.get('http://192.168.43.15/Connect/Connect/Back/web/app_dev.php/accounts/'+form['Qrstring']+'/'+form['Amount']+'/out')
+    this.http.get('http://192.168.1.3/Connect/Connect/Back/web/app_dev.php/accounts/'+form['Qrstring']+'/'+form['Amount']+'/out')
     .subscribe(res=>{console.log(res)});
   }
   verifyAccess(form)
@@ -30,15 +30,15 @@ export class AccountService {
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
     console.log(form);
-    this.http.post('http://192.168.43.15/Connect/Connect/Back/web/app_dev.php/accounts/new',form,options).subscribe(res=>{
+    this.http.post('http://192.168.1.3/Connect/Connect/Back/web/app_dev.php/accounts/new',form,options).subscribe(res=>{
     });
   }
   existAccount(form)
   {
-    return this.http.get('http://192.168.43.15/Connect/Connect/Back/web/app_dev.php/accounts/'+form['Qrstring']+'/exist');
+    return this.http.get('http://192.168.1.3/Connect/Connect/Back/web/app_dev.php/accounts/'+form['Qrstring']+'/exist');
   }
   verifySold(form)
   {
-    return this.http.get('http://192.168.43.15/Connect/Connect/Back/web/app_dev.php/accounts/'+form['Qrstring']+'/sold');
+    return this.http.get('http://192.168.1.3/Connect/Connect/Back/web/app_dev.php/accounts/'+form['Qrstring']+'/sold');
   }
 }

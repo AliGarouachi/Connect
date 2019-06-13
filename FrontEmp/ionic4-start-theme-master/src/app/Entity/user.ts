@@ -9,5 +9,6 @@ export class User {
     public  verifyaccess: boolean;
     public  idService: string;
     public  nameService: string;
+    public  id:Int16Array;
 
 }

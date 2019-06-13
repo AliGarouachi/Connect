@@ -12,6 +12,10 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Transactions
 {
+    public function __construct()
+    {
+        $this->date = new \DateTime();
+    }
     /**
      * @var \DateTime
      *
@@ -66,6 +70,36 @@ class Transactions
     private $idetab;
 
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="Qrstring", type="string", length=255, nullable=true)
+     */
+    private $qrString;
+
+    /**
+     * Set date
+     *
+     * @param \DateTime $date
+     *
+     * @return Transactions
+     */
+    public function setQrstring($qrString)
+    {
+        $this->qrString = $qrString;
+
+        return $this;
+    }
+
+    /**
+     * Get date
+     *
+     * @return \DateTime
+     */
+    public function getQrstring()
+    {
+        return $this->qrString;
+    }
 
     /**
      * Set date

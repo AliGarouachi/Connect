@@ -29,7 +29,7 @@ export class AppComponent {
         icon: 'home'
       },
       {
-        title: 'About',
+        title: 'Mes Transactions',
         url: '/about',
         direct: 'forward',
         icon: 'information-circle-outline'

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { TransactionService } from 'src/app/Service/Transaction/transaction.service';
+import { LoginService } from 'src/app/Service/Login/login.service';
 
 @Component({
   selector: 'app-about',
@@ -6,10 +8,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./about.page.scss'],
 })
 export class AboutPage implements OnInit {
+  transactions:any;
+  constructor(  public transaction:TransactionService
 
-  constructor() { }
+  ) { 
+
+   }
 
   ngOnInit() {
+    this.transaction.get(1).subscribe(res=>{
+      this.transactions=res.json();
+      this.transactions.forEach(trans => {
+       console.log( trans.date=new Date(trans.date.timestamp).toLocaleString());
+        
+      });
+      console.log(this.transactions);
+    });
   }
 
 }

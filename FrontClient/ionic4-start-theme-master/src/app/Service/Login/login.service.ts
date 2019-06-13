@@ -16,7 +16,7 @@ export class LoginService {
     
     let headers = new Headers({ 'Content-Type': 'application/json' });
 	  let options = new RequestOptions({ headers: headers });
-    return this.http.post(`http://192.168.1.9/Connect/Connect/Back/web/app_dev.php/logged`,credentials['value'], options);
+    return this.http.post(`http://192.168.1.3/Connect/Connect/Back/web/app_dev.php/logged`,credentials['value'], options);
     
     
   }
@@ -24,7 +24,7 @@ export class LoginService {
   {
     console.log(username['value']);
     this.storage.set('username', username['value']);
-    this.http.get(`http://192.168.1.9/Connect/Connect/Back/web/app_dev.php/getToken`).subscribe(res=>{
+    this.http.get(`http://192.168.1.3/Connect/Connect/Back/web/app_dev.php/getToken`).subscribe(res=>{
       res=res.json();
       this.storage.set('token', res[0]);
     });
@@ -33,7 +33,7 @@ export class LoginService {
   getcurrentuser()
   {
     this.storage.get('username').then(res=>{
-     this.http.get('http://192.168.1.9/Connect/Connect/Back/web/app_dev.php/employees/'+res+'/get_by_fos').subscribe(res=>{
+     this.http.get('http://192.168.1.3/Connect/Connect/Back/web/app_dev.php/employees/'+res+'/get_by_fos').subscribe(res=>{
         res=res.json();
         console.log(res);
         LoginService.user=new User();
