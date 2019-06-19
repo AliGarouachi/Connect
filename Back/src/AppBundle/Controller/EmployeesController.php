@@ -38,8 +38,6 @@ class EmployeesController extends Controller
         $employee = new Employees();
         $form = $this->createForm('AppBundle\Form\EmployeesType', $employee);
         $form->handleRequest($request);
-        $fosform = $this->createForm('AppBundle\Form\EmployeesType', $employee);
-        $fosform->handleRequest($request);
         $em = $this->getDoctrine()->getManager();
         $services = $em->getRepository('AppBundle:Services')->findAll();
         if ($form->isSubmitted() && $form->isValid()) {
@@ -47,13 +45,13 @@ class EmployeesController extends Controller
             $employee->setIdfos($lastuser);
             $service = $em->getRepository('AppBundle:Services')->findBy(array("id"=>$_POST['idservice']));
             $employee->setIdservice($service[0]);
-            if($_POST['giveaccess'])
+            if(isset($_POST['giveaccess']))
                 $employee->setGiveaccess(1);
-            if($_POST['payment'])
+            if(isset($_POST['payment']))
                 $employee->setPayment(1);
-            if($_POST['transfert'])
+            if(isset($_POST['transfert']))
                 $employee->setTransfert(1);
-            if($_POST['verifyaccess'])
+            if(isset($_POST['verifyaccess']))
                 $employee->setVerifyaccess(1);
             $em = $this->getDoctrine()->getManager();
             $em->persist($employee);
@@ -90,10 +88,10 @@ class EmployeesController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $user = $em->getRepository('AppBundle:User')->findBy(array("username"=>$username));
-        
-        $employees = $em->getRepository('AppBundle:Employees')->findBy(array("idfos"=>$user[0]->getId()));
 
-  
+        $employees = $em->getRepository('AppBundle:Employees')->findBy(array("idfos"=>$user[0]->getId()));
+        
+
         $serializer=new Serializer([new ObjectNormalizer()]);
         $employees=$serializer->normalize($employees);
         return new JsonResponse($employees);

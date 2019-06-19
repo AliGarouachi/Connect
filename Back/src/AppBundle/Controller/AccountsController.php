@@ -44,6 +44,41 @@ class AccountsController extends Controller
         return new JsonResponse($csrfToken);
 
     }
+    public function goinAction($qrcode)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $accounts = $em->getRepository('AppBundle:Accounts')->findBy(array("qrstring"=>$qrcode));
+        $account=$accounts[0];
+        if($account->getNumberin()<$account->getNumberaccess())
+        {
+          $csrfToken='accepte';
+          $account->setNumberin($account->getNumberin()+1);
+        }
+        else {
+          $csrfToken='no';
+        }
+        $this->getDoctrine()->getManager()->flush();
+
+        $csrfToken=array($csrfToken);
+        $serializer=new Serializer([new ObjectNormalizer()]);
+        $csrfToken=$serializer->normalize($csrfToken);
+        return new JsonResponse($csrfToken);
+
+    }
+    public function gooutAction($qrcode)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $accounts = $em->getRepository('AppBundle:Accounts')->findBy(array("qrstring"=>$qrcode));
+        $account=$accounts[0];
+        $account->setNumberin($account->getNumberin()-1);
+        $this->getDoctrine()->getManager()->flush();
+        $csrfToken='Retreved';
+        $csrfToken=array($csrfToken);
+        $serializer=new Serializer([new ObjectNormalizer()]);
+        $csrfToken=$serializer->normalize($csrfToken);
+        return new JsonResponse($csrfToken);
+
+    }
     public function existAction($qrcode)
     {
         $em = $this->getDoctrine()->getManager();
@@ -119,24 +154,30 @@ class AccountsController extends Controller
             $csrfToken=$serializer->normalize($csrfToken);
             return new JsonResponse($csrfToken);
         }
-        
         $account = new Accounts();
         $form = $this->createForm('AppBundle\Form\AccountsType', $account);
         $form->handleRequest($request);
         if ($form->isSubmitted()) {
             $em = $this->getDoctrine()->getManager();
+            $account->setQrstring($_POST['qrstring']);
             $em->persist($account);
             $em->flush();
 
-            return $this->redirectToRoute('accounts_show', array('id' => $account->getId()));
+            return $this->redirectToRoute('clients_new', array('id' => $account->getId()));
         }
-
+        $length = 20;
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
         return $this->render('accounts/new.html.twig', array(
             'account' => $account,
             'form' => $form->createView(),
+            'randomCode' => $randomString ,
         ));
     }
-
     /**
      * Finds and displays a account entity.
      *

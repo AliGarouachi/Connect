@@ -28,7 +28,14 @@ export class LoginPage implements OnInit {
   }
 
   ngOnInit() {
-
+    this.storage.get('username').then(res=>{
+      if(res!=null)
+        {
+          this.login.getcurrentuser(res);
+        }
+    }
+      );
+    
     this.onLoginForm = this.formBuilder.group({
       'username': [null, Validators.compose([
         Validators.required
@@ -93,9 +100,9 @@ export class LoginPage implements OnInit {
   goToHome() {
     
     this.login.login(this.onLoginForm).subscribe(res=>{
+
       this.login.Store(this.onLoginForm.get('username'));
-      this.login.getcurrentuser();
-      console.log(LoginService.user);
+      this.login.getcurrentuser(this.onLoginForm.get('username')['value']);
       //this.navCtrl.navigateRoot('/home-results');
     });
     // this.navCtrl.navigateRoot('/home-results');

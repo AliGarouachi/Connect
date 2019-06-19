@@ -236,18 +236,15 @@ export class HomeResultsPage {
     });
   }
   scanCode() {
-    this.scannedData = 'testValue';
-    // this.barcodeScanner
-    //   .scan()
-    //   .then(barcodeData => {
-    //     alert("Barcode data " + JSON.stringify(barcodeData));
-    //     this.scannedData = barcodeData;
-    //     console.log(this.scannedData['text']);
-    //     this.scannedData=this.scannedData['text'];
-    //   })
-    //   .catch(err => {
-    //     console.log("Error", err);
-    //   });
+    this.barcodeScanner
+      .scan()
+      .then(barcodeData => {
+        this.scannedData = barcodeData;
+        this.scannedData=this.scannedData['text'];
+      })
+      .catch(err => {
+        console.log("Error", err);
+      });
   }
 
   encodedText() {
@@ -346,7 +343,18 @@ export class HomeResultsPage {
       res=res.json();
       if(res[0]=='yes')
       {
-        this.notify('Valider','');
+        this.account.goin(form).subscribe(res=>{
+          res=res.json();
+          if(res[0]!='no')
+          {
+            this.notify('Valider','');
+          }
+          else
+          {
+            this.notify('no access','');
+          }
+        });
+        
       }
       else
       {

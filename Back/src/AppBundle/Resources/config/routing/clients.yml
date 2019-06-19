@@ -22,3 +22,7 @@ clients_delete:
     path:     /{id}/delete
     defaults: { _controller: "AppBundle:Clients:delete" }
     methods:  DELETE
+json_clients_get_by_fos:
+    path:     /{username}/get_by_fos
+    defaults: { _controller: "AppBundle:Clients:get_by_fos" }
+    methods:  [GET, POST]

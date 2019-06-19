@@ -13,7 +13,7 @@ class ClientsType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('lastName')->add('firstName')->add('cin')->add('passport')->add('idAccount')->add('idFos')->add('idEtab');
+        $builder->add('lastName')->add('firstName')->add('cin')->add('passport');
     }/**
      * {@inheritdoc}
      */

@@ -15,14 +15,6 @@
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
-  <ion-toolbar color="dark">
-    <ion-searchbar [(ngModel)]="searchKey"></ion-searchbar>
-    <ion-buttons slot="end">
-      <ion-button size="small" shape="round" color="medium" (click)="searchFilter()">
-        <ion-icon name="options"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
 </ion-header>
 
 <ion-content>
@@ -33,7 +25,7 @@
   <ion-button *ngIf="showData" expand="full" color="dark" (click)="encodedText()" full>
     afficher son id
   </ion-button>
-  <ion-button *ngIf="showData" expand="full" color="dark" (click)="scanCode()" full>
+  <ion-button *ngIf="!showData" expand="full" color="dark" (click)="scanCode()" full>
     changer de carte
   </ion-button>
 </ion-content>

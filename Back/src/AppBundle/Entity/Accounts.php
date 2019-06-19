@@ -14,6 +14,8 @@ class Accounts
 {
     public function __construct($period = 1)
     {
+
+        $this->numberIn = 0;
         $this->receivingdate = new \DateTime();
         $this->expirationdate = new \DateTime();
         $this->expirationdate->setDate($this->expirationdate->format('Y'), $this->expirationdate->format('m')+$period, $this->expirationdate->format('d'));
@@ -39,6 +41,13 @@ class Accounts
      * @ORM\Column(name="NumberAccess", type="integer", nullable=false)
      */
     private $numberaccess;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="numberIn", type="integer", nullable=true)
+     */
+    private $numberin;
 
     /**
      * @var \DateTime
@@ -122,7 +131,29 @@ class Accounts
     {
         return $this->qrstring;
     }
+    /**
+     * Set numberin
+     *
+     * @param integer $numberaccess
+     *
+     * @return Accounts
+     */
+    public function setNumberin($numberin)
+    {
+        $this->numberin = $numberin;
 
+        return $this;
+    }
+
+    /**
+     * Get numberin
+     *
+     * @return integer
+     */
+    public function getNumberin()
+    {
+        return $this->numberin;
+    }
     /**
      * Set numberaccess
      *

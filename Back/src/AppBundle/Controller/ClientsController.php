@@ -5,6 +5,9 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Clients;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 
 /**
  * Client controller.
@@ -26,7 +29,15 @@ class ClientsController extends Controller
             'clients' => $clients,
         ));
     }
-
+    public function get_by_fosAction($username)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository('AppBundle:User')->findBy(array("username"=>$username));
+        $client = $em->getRepository('AppBundle:Clients')->findBy(array("idfos"=>$user[0]->getId()));
+        $serializer=new Serializer([new ObjectNormalizer()]);
+        $client=$serializer->normalize($client);
+        return new JsonResponse($client);
+    }
     /**
      * Creates a new client entity.
      *
@@ -39,6 +50,10 @@ class ClientsController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $lastuser = $em->getRepository('AppBundle:FosUser')->findOneBy([], ['id' => 'desc']);
+            $lastaccount = $em->getRepository('AppBundle:Accounts')->findOneBy([], ['id' => 'desc']);
+            $client->setIdfos($lastuser);
+            $client->setIdAccount($lastaccount);
             $em->persist($client);
             $em->flush();
 
