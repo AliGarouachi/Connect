@@ -38,14 +38,12 @@ export class HomeResultsPage {
   encodeData: any;
   scannedData: {};
   barcodeScannerOptions: BarcodeScannerOptions;
-  Payment: boolean;
-  Transfert: boolean;
-  VerifyAccess: boolean;
-  GiveAccess: boolean;
   amount: any;
+  sold:any=null;
   numberaccess: any;
   user: User = LoginService.user;
   products: any =[];
+  showData:boolean=false;
   constructor(
     public navCtrl: NavController,
     public menuCtrl: MenuController,
@@ -60,13 +58,36 @@ export class HomeResultsPage {
     public loadingCtrl: LoadingController,
     public product:ProductService,
   ) {
-    setInterval(() => {
-      this.getAmount();
-    },1000);
+    this.storage.get("qrstring").then(
+      val=>{console.log(val)
+      if(val!=null)
+      {
+        this.showData=true;
+        this.scannedData=val;
+        setInterval(() => {
+          this.getAmount();
+        },1000);
+      }
+      });
   }
   getAmount()
-  {
-    
+  {console.log("loop");
+    let form = {
+      "Amount": this.amount,
+      "Qrstring": this.scannedData
+    }
+    this.account.verifySold(form).subscribe(res=>{
+      res=res.json();
+      
+      if(res[0]=='no')
+      {
+        console.log('ce compte est introuvable');
+      }
+      else
+      {
+        this.sold=parseInt(res[0]);
+      }
+    });
   }
   
   async notify(title,message)
@@ -80,7 +101,13 @@ export class HomeResultsPage {
     await alert.present();
   }
   scanCode() {
-    //  this.scannedData = 'testValue';
+    // console.log("okey1");
+    // this.scannedData = 'testValue';
+    // this.showData=true;
+    // setInterval(() => {
+      
+    //   this.getAmount();
+    // },1000);
     this.barcodeScanner
       .scan()
       .then(barcodeData => {
@@ -88,6 +115,11 @@ export class HomeResultsPage {
         this.scannedData = barcodeData;
         console.log(this.scannedData['text']);
         this.scannedData=this.scannedData['text'];
+        this.showData=true;
+        this.storage.set("qrstring",this.scannedData);
+        setInterval(() => {
+          this.getAmount();
+        },1000);
       })
       .catch(err => {
         console.log("Error", err);
@@ -95,6 +127,7 @@ export class HomeResultsPage {
   }
 
   encodedText() {
+    this.encodeData=this.scannedData;
     this.barcodeScanner
       .encode(this.barcodeScanner.Encode.TEXT_TYPE, this.encodeData)
       .then(

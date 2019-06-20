@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { Platform, NavController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-
+import { Storage } from '@ionic/storage';
 import { Pages } from './interfaces/pages';
 
 @Component({
@@ -19,7 +19,8 @@ export class AppComponent {
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    public navCtrl: NavController
+    public navCtrl: NavController,
+    private storage: Storage
   ) {
     this.appPages = [
       {
@@ -58,6 +59,8 @@ export class AppComponent {
   }
 
   logout() {
+    console.log('clear');
+    this.storage.clear();
     this.navCtrl.navigateRoot('/');
   }
 }

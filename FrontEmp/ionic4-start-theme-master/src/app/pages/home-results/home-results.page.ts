@@ -26,6 +26,7 @@ import { User } from '../../Entity/user';
 import { LoginService } from 'src/app/Service/Login/login.service';
 import { AccountService } from 'src/app/Service/Account/account.service';
 import { ProductService } from 'src/app/Service/Product/product.service';
+import { TransactionService } from 'src/app/Service/Transaction/transaction.service';
 @Component({
   selector: 'app-home-results',
   templateUrl: './home-results.page.html',
@@ -59,6 +60,7 @@ export class HomeResultsPage {
     private account: AccountService,
     public loadingCtrl: LoadingController,
     public product:ProductService,
+    public transaction:TransactionService,
   ) {
     
     this.encodeData = "https://www.FreakyJolly.com";
@@ -132,7 +134,13 @@ export class HomeResultsPage {
       else {
         this.account.giveAccess(form);
         this.notify("Compte Crée","le compte a été crée ");
-
+        this.transaction.record(
+          {
+            "qrstring":this.scannedData,
+            "idemployee":LoginService.user.id,
+            "amount":this.amount
+          }
+        );
       }
     });
     
@@ -163,6 +171,13 @@ export class HomeResultsPage {
           
           this.account.add(form);
           this.notify("Alimentation","Le compte a été alimenter de : "+this.amount+"dt");
+          this.transaction.record(
+            {
+              "qrstring":this.scannedData,
+              "idemployee":LoginService.user.id,
+              "amount":this.amount
+            }
+          );
         }
         else {
           this.notify("compte introuvable","le code scanner n'est lié a aucun compte");
@@ -199,6 +214,13 @@ export class HomeResultsPage {
           {
             this.account.getpayed(form);
             this.notify("Pay","la somme de "+this.amount+"dt a été retirer du compte");
+            this.transaction.record(
+              {
+                "qrstring":this.scannedData,
+                "idemployee":LoginService.user.id,
+                "amount":this.amount*-1
+              }
+            );
           }
           else
           {
@@ -214,13 +236,10 @@ export class HomeResultsPage {
     });
   }
   scanCode() {
-    //  this.scannedData = 'testValue';
     this.barcodeScanner
       .scan()
       .then(barcodeData => {
-        alert("Barcode data " + JSON.stringify(barcodeData));
         this.scannedData = barcodeData;
-        console.log(this.scannedData['text']);
         this.scannedData=this.scannedData['text'];
       })
       .catch(err => {
@@ -324,13 +343,26 @@ export class HomeResultsPage {
       res=res.json();
       if(res[0]=='yes')
       {
-        this.notify('Valider','');
+        this.account.goin(form).subscribe(res=>{
+          res=res.json();
+          if(res[0]!='no')
+          {
+            this.notify('Valider','');
+          }
+          else
+          {
+            this.notify('no access','');
+          }
+        });
+        
       }
       else
       {
         this.notify('non Valider','');
       }
     });
+   
+
   }
 
 }

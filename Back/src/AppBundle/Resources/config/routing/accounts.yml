@@ -30,6 +30,14 @@ accounts_in:
     path:     /{qrcode}/{amount}/in
     defaults: { _controller: "AppBundle:Accounts:in" }
     methods:  [GET, POST]
+accounts_goout:
+    path:     /{qrcode}/out
+    defaults: { _controller: "AppBundle:Accounts:goout" }
+    methods:  [GET, POST]
+accounts_goin:
+    path:     /{qrcode}/in
+    defaults: { _controller: "AppBundle:Accounts:goin" }
+    methods:  [GET, POST]
 accounts_exist:
     path:     /{qrcode}/exist
     defaults: { _controller: "AppBundle:Accounts:exist" }

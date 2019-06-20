@@ -7,7 +7,7 @@
                     </a>
 {% endblock %}
 {% block admin_lte_sidebar %}
- 
+
 <ul class="sidebar-menu tree" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
         <li><a href="{{ path('product_index') }}"><i class="fa fa-product-hunt"></i> <span>Products</span></a></li>
@@ -15,13 +15,18 @@
         <li><a href="{{ path('transactions_index') }}"><i class="fa fa-credit-card-alt text-green"></i> <span>Transactions</span></a></li>
         <li><a href="{{ path('clients_index') }}"><i class="fa fa-user-circle-o text-aqua"></i> <span>Clients</span></a></li>
         <li><a href="{{ path('accounts_index') }}"><i class="fa fa-circle-o text-red    " aria-hidden="true"></i> <span>Accounts</span></a></li>
-                   
+
 {% endblock %}
 {% block header_content %}{% endblock %}
 {% block page_content %}
     <h1>Employees list</h1>
+    <form  action="{{ path('fos_user_registration_register') }}" method="post">
+    <input type="text" name='path' style="display : none;" value="employees">
+    <input type="submit" value="Add Employee" class="btn btn-primary " style="float: right;"/>
+    </form>
+    {# <input type="submit" value="Create" class="btn btn-success" style="float: right;">  <i class="fa fa-plus"></i>Add Employee</input>
     <a href="{{ path('fos_user_registration_register') }}" class="btn btn-app" style="float: right;">
-        <i class="fa fa-plus"></i>Add Employee</a>
+    </a> #}
 
     <div class="row">
         <div class="col-xs-12">

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
-
+import { Storage } from '@ionic/storage';
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.page.html',
@@ -18,7 +18,7 @@ export class SettingsPage implements OnInit {
   paymentMethods: any = ['Paypal', 'Credit Card'];
   currencies: any = ['USD', 'BRL', 'EUR'];
 
-  constructor(public navCtrl: NavController) { }
+  constructor(public navCtrl: NavController,private storage: Storage) { }
 
   ngOnInit() {
   }
@@ -28,6 +28,8 @@ export class SettingsPage implements OnInit {
   }
 
   logout() {
+    console.log('clear');
+    this.storage.clear();
     this.navCtrl.navigateRoot('/');
   }
 
