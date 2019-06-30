@@ -82,6 +82,40 @@ class Accounts
      */
     private $idetab;
 
+    /**
+     * @var \AppBundle\Entity\Clients
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Clients")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="IdClient", referencedColumnName="id")
+     * })
+     */
+    private $idclient;
+
+    /**
+     * Set idclient
+     *
+     * @param \AppBundle\Entity\Clients $idclient
+     *
+     * @return Clients
+     */
+    public function setIdclient(\AppBundle\Entity\Clients $idclient = null)
+    {
+        $this->idclient = $idclient;
+
+        return $this;
+    }
+
+    /**
+     * Get idclient
+     *
+     * @return \AppBundle\Entity\Clients
+     */
+    public function getIdclient()
+    {
+        return $this->idclient;
+    }
+
 
 
     /**

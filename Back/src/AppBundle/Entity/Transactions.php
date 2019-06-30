@@ -78,12 +78,13 @@ class Transactions
     private $qrString;
 
     /**
-     * Set date
+     * Set qrstring
      *
-     * @param \DateTime $date
+     * @param string $qrstring
      *
-     * @return Transactions
+     * @return Accounts
      */
+     
     public function setQrstring($qrString)
     {
         $this->qrString = $qrString;
@@ -92,9 +93,9 @@ class Transactions
     }
 
     /**
-     * Get date
+     * Get qrstring
      *
-     * @return \DateTime
+     * @return integer
      */
     public function getQrstring()
     {

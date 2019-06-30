@@ -26,6 +26,7 @@ class TransactionsController extends Controller
         // $serializer=new Serializer([new ObjectNormalizer()]);
         // $transactions=$serializer->normalize($transactions);
         // return new JsonResponse($transactions);
+    
         return $this->render('transactions/index.html.twig', array(
             'transactions' => $transactions,
         ));
