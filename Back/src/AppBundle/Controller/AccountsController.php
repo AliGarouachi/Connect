@@ -25,11 +25,13 @@ class AccountsController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $accounts = $em->getRepository('AppBundle:Accounts')->findAll();
-
+        
         return $this->render('accounts/index.html.twig', array(
             'accounts' => $accounts,
         ));
     }
+
+    
     public function inAction($qrcode,$amount)
     {
         $em = $this->getDoctrine()->getManager();
@@ -184,10 +186,13 @@ class AccountsController extends Controller
      */
     public function showAction(Accounts $account)
     {
+        $em = $this->getDoctrine()->getManager();
         $deleteForm = $this->createDeleteForm($account);
-
+        $transactions = $em->getRepository('AppBundle:Transactions')->findBy(array(
+            'qrstring' => $account->getQrstring()));
         return $this->render('accounts/show.html.twig', array(
             'account' => $account,
+            'transactions' => $transactions,
             'delete_form' => $deleteForm->createView(),
         ));
     }
