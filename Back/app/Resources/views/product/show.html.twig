@@ -10,16 +10,16 @@
  
 <ul class="sidebar-menu tree" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
-        <li><a href="{{ path('product_index') }}"><i class="fa fa-product-hunt"></i> <span>Products</span></a></li>
+        <li><a href="{{ path('product_index') }}"><i class="fa fa-product-hunt"></i> <span>Produits</span></a></li>
         <li><a href="{{ path('employees_index') }}"><i class="fa fa-users text-yellow"></i> <span>Employees</span></a></li>
         <li><a href="{{ path('transactions_index') }}"><i class="fa fa-credit-card-alt text-green"></i> <span>Transactions</span></a></li>
         <li><a href="{{ path('clients_index') }}"><i class="fa fa-user-circle-o text-aqua"></i> <span>Clients</span></a></li>
-        <li><a href="{{ path('accounts_index') }}"><i class="fa fa-circle-o text-red    " aria-hidden="true"></i> <span>Accounts</span></a></li>
+        <li><a href="{{ path('accounts_index') }}"><i class="fa fa-circle-o text-red    " aria-hidden="true"></i> <span>Comptes</span></a></li>
                    
 {% endblock %}
 {% block header_content %}{% endblock %}
 {% block page_content %}
-    <h1>Product</h1>
+    <h1>Produit</h1>
 
     <table class="table table-bordered table-hover dataTable">
         <tbody>
@@ -28,20 +28,16 @@
                 <td>{{ product.id }}</td>
             </tr>
             <tr>
-                <th>Name</th>
+                <th>Nom</th>
                 <td>{{ product.name }}</td>
             </tr>
             <tr>
-                <th>Price</th>
+                <th>Prix</th>
                 <td>{{ product.price }}</td>
             </tr>
             <tr>
-                <th>Qt</th>
+                <th>Quantité</th>
                 <td>{{ product.qt }}</td>
-            </tr>
-            <tr>
-                <th>Id</th>
-                <td>{{ product.id }}</td>
             </tr>
         </tbody>
     </table>
@@ -51,4 +47,11 @@
             <a href="{{ path('product_index') }}">Back to the list</a>
         </li>
     </ul>
+{% endblock %}
+{% block admin_lte_footer %}
+<footer class="main-footer">
+                <div class="pull-right hidden-xs"><b>Version</b> 1.0.0</div>
+                <strong>Copyright &copy; 2019-2020 <a href="">Connecti</a>.</strong>
+                All rights reserved.
+            </footer>
 {% endblock %}

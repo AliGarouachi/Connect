@@ -6,21 +6,23 @@
                         <img src="../../images/Logo-Wincom.png" class="img-circle">
                     </a>
 {% endblock %}
+
+ 
 {% block admin_lte_sidebar %}
  
 <ul class="sidebar-menu tree" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
-        <li><a href="{{ path('product_index') }}"><i class="fa fa-product-hunt"></i> <span>Products</span></a></li>
+        <li><a href="{{ path('product_index') }}"><i class="fa fa-product-hunt"></i> <span>Produits</span></a></li>
         <li><a href="{{ path('employees_index') }}"><i class="fa fa-users text-yellow"></i> <span>Employees</span></a></li>
         <li><a href="{{ path('transactions_index') }}"><i class="fa fa-credit-card-alt text-green"></i> <span>Transactions</span></a></li>
         <li><a href="{{ path('clients_index') }}"><i class="fa fa-user-circle-o text-aqua"></i> <span>Clients</span></a></li>
-        <li><a href="{{ path('accounts_index') }}"><i class="fa fa-circle-o text-red    " aria-hidden="true"></i> <span>Accounts</span></a></li>
-                   
+        <li><a href="{{ path('accounts_index') }}"><i class="fa fa-circle-o text-red    " aria-hidden="true"></i> <span>Comptes</span></a></li>
+                
 {% endblock %}
 {% block header_content %}{% endblock %}
 {% block page_content %}
     <h1>Accounts list</h1>             
-              <a href="{{ path('accounts_new') }}" class="btn btn-app" style="float: right;" ><i class="fa fa-plus"></i>Add Account</a>
+              <a href="{{ path('accounts_new') }}" class="btn btn-app" style="float: right;" ><i class="fa fa-plus"></i>Ajouter un compte</a>
 
 
     <div class="row">
@@ -45,11 +47,10 @@
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Amount</th>
-                <th>Qr code</th>
-                <th>Number access</th>
-                <th>Expiration date</th>
-                <th>Receiving date</th>
+                <th>Montant</th>
+                <th>Nombre d'accès</th>
+                <th>Date d'expiration</th>
+                <th>Date de reception</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -57,7 +58,6 @@
             <tr>
                 <td><a href="{{ path('accounts_show', { 'id': account.id }) }}">{{ account.id }}</a></td>
                 <td>{{ account.amount }}</td>
-                <td>{{ account.qrstring }}</td>
                 <td>{{ account.numberaccess }}</td>
                 <td>{% if account.expirationdate %}{{ account.expirationdate|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>{% if account.receivingdate %}{{ account.receivingdate|date('Y-m-d H:i:s') }}{% endif %}</td>
@@ -66,14 +66,14 @@
 
                 <td>
                     <div class="btn-group">
-                  <a href="{{ path('accounts_show', { 'id': account.id }) }}" class="btn btn-primary">show</a>
+                  <a href="{{ path('accounts_show', { 'id': account.id }) }}" class="btn btn-primary">Afficher</a>
                   <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                     <span class="caret"></span>
                     <span class="sr-only">Toggle Dropdown</span>
                   </button>
                   <ul class="dropdown-menu" role="menu">
-                    <li><a href="{{ path('accounts_show', { 'id': account.id }) }}" >show</a></li>
-                    <li><a href="{{ path('accounts_edit', { 'id': account.id }) }}" >edit</a></li>
+                    <li><a href="{{ path('accounts_show', { 'id': account.id }) }}" >Afficher</a></li>
+                    <li><a href="{{ path('accounts_edit', { 'id': account.id }) }}" >Modifier</a></li>
                   </ul>
                 </div>
                 </td>
@@ -93,4 +93,11 @@
             
         
     
+{% endblock %}
+{% block admin_lte_footer %}
+<footer class="main-footer">
+                <div class="pull-right hidden-xs"><b>Version</b> 1.0.0</div>
+                <strong>Copyright &copy; 2019-2020 <a href="">Connecti</a>.</strong>
+                All rights reserved.
+            </footer>
 {% endblock %}

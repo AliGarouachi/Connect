@@ -189,7 +189,7 @@ class AccountsController extends Controller
         $em = $this->getDoctrine()->getManager();
         $deleteForm = $this->createDeleteForm($account);
         $transactions = $em->getRepository('AppBundle:Transactions')->findBy(array(
-            'qrstring' => $account->getQrstring()));
+            'qrString' => $account->getQrstring()));
         return $this->render('accounts/show.html.twig', array(
             'account' => $account,
             'transactions' => $transactions,

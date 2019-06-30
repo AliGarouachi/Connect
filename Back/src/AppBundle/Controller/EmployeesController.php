@@ -73,10 +73,13 @@ class EmployeesController extends Controller
      */
     public function showAction(Employees $employee)
     {
+        $em = $this->getDoctrine()->getManager();
         $deleteForm = $this->createDeleteForm($employee);
-
+        $transactions = $em->getRepository('AppBundle:Transactions')->findBy(array(
+            'idemployee' => $employee->getId()));
         return $this->render('employees/show.html.twig', array(
             'employee' => $employee,
+            'transactions' => $transactions,
             'delete_form' => $deleteForm->createView(),
         ));
     }

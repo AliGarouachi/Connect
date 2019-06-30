@@ -9,16 +9,16 @@
  
 <ul class="sidebar-menu tree" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
-        <li><a href="{{ path('product_index') }}"><i class="fa fa-product-hunt"></i> <span>Products</span></a></li>
+        <li><a href="{{ path('product_index') }}"><i class="fa fa-product-hunt"></i> <span>Produits</span></a></li>
         <li><a href="{{ path('employees_index') }}"><i class="fa fa-users text-yellow"></i> <span>Employees</span></a></li>
         <li><a href="{{ path('transactions_index') }}"><i class="fa fa-credit-card-alt text-green"></i> <span>Transactions</span></a></li>
         <li><a href="{{ path('clients_index') }}"><i class="fa fa-user-circle-o text-aqua"></i> <span>Clients</span></a></li>
-        <li><a href="{{ path('accounts_index') }}"><i class="fa fa-circle-o text-red    " aria-hidden="true"></i> <span>Accounts</span></a></li>
+        <li><a href="{{ path('accounts_index') }}"><i class="fa fa-circle-o text-red    " aria-hidden="true"></i> <span>Comptes</span></a></li>
                    
 {% endblock %}
 {% block header_content %}{% endblock %}
 {% block page_content %}
-    <h1>Transactions list</h1>
+    <h1>Liste des transactions</h1>
     {# <a href="{{ path('transactions_new') }}" class="btn btn-app" style="float: right;">
         <i class="fa fa-plus"></i>Add Employee</a> #}
 
@@ -47,8 +47,8 @@
                             <tr>
                                 <th>Id</th>
                                 <th>Date</th>
-                                <th>Amount</th>
-                                <th>employee</th>
+                                <th>Montant</th>
+                                <th>Employé</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -67,14 +67,14 @@
                                     <td>{{ transaction.idemployee.Lastname }}&nbsp{{ transaction.idemployee.Firstname }}</td>
                                     <td>
                                         <div class="btn-group">
-                                            <a href="{{ path('transactions_show', { 'id': transaction.id }) }}" class="btn btn-primary">show</a>
+                                            <a href="{{ path('transactions_show', { 'id': transaction.id }) }}" class="btn btn-primary">Afficher</a>
                                             <button aria-expanded="false" class="btn btn-info dropdown-toggle" data-toggle="dropdown" type="button">
                                                 <span class="caret"></span>
                                                 <span class="sr-only">Toggle Dropdown</span>
                                             </button>
                                             <ul class="dropdown-menu" role="menu">
                                                 <li>
-                                                    <a href="{{ path('transactions_show', { 'id': transaction.id }) }}">show</a>
+                                                    <a href="{{ path('transactions_show', { 'id': transaction.id }) }}">Afficher</a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -89,4 +89,11 @@
             <!-- /.box -->
         </div>
     </div>
+{% endblock %}
+{% block admin_lte_footer %}
+<footer class="main-footer">
+                <div class="pull-right hidden-xs"><b>Version</b> 1.0.0</div>
+                <strong>Copyright &copy; 2019-2020 <a href="">Connecti</a>.</strong>
+                All rights reserved.
+            </footer>
 {% endblock %}

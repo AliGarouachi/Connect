@@ -7,22 +7,22 @@
                     </a>
 {% endblock %}
 {% block admin_lte_sidebar %}
-
+ 
 <ul class="sidebar-menu tree" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
-        <li><a href="{{ path('product_index') }}"><i class="fa fa-product-hunt"></i> <span>Products</span></a></li>
+        <li><a href="{{ path('product_index') }}"><i class="fa fa-product-hunt"></i> <span>Produits</span></a></li>
         <li><a href="{{ path('employees_index') }}"><i class="fa fa-users text-yellow"></i> <span>Employees</span></a></li>
         <li><a href="{{ path('transactions_index') }}"><i class="fa fa-credit-card-alt text-green"></i> <span>Transactions</span></a></li>
         <li><a href="{{ path('clients_index') }}"><i class="fa fa-user-circle-o text-aqua"></i> <span>Clients</span></a></li>
-        <li><a href="{{ path('accounts_index') }}"><i class="fa fa-circle-o text-red    " aria-hidden="true"></i> <span>Accounts</span></a></li>
-
+        <li><a href="{{ path('accounts_index') }}"><i class="fa fa-circle-o text-red    " aria-hidden="true"></i> <span>Comptes</span></a></li>
+                   
 {% endblock %}
 {% block header_content %}{% endblock %}
 {% block page_content %}
-    <h1>Clients list</h1>
+    <h1>Liste des clients</h1>
     <form  action="{{ path('fos_user_registration_register') }}" method="post">
     <input type="text" name='path' style="display : none;" value="accounts">
-    <input type="submit" value="Add client" class="btn btn-primary " style="float: right;"/>
+    <input type="submit" value="Ajouter client" class="btn btn-app " style="float: right;"/>
     </form>
     <div class="row">
         <div class="col-xs-12">
@@ -46,8 +46,8 @@
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Lastname</th>
-                <th>Firstname</th>
+                <th>Prénom</th>
+                <th>Nom</th>
                 <th>Cin</th>
                 <th>Passport</th>
                 <th>Actions</th>
@@ -63,14 +63,14 @@
                 <td>{{ client.passport }}</td>
                 <td>
                     <div class="btn-group">
-                  <a href="{{ path('clients_show', { 'id': client.id }) }}" class="btn btn-primary">show</a>
+                  <a href="{{ path('clients_show', { 'id': client.id }) }}" class="btn btn-primary">Afficher</a>
                   <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                     <span class="caret"></span>
                     <span class="sr-only">Toggle Dropdown</span>
                   </button>
                   <ul class="dropdown-menu" role="menu">
-                    <li><a href="{{ path('clients_show', { 'id': client.id }) }}" >show</a></li>
-                    <li><a href="{{ path('clients_edit', { 'id': client.id }) }}" >edit</a></li>
+                    <li><a href="{{ path('clients_show', { 'id': client.id }) }}" >Afficher</a></li>
+                    <li><a href="{{ path('clients_edit', { 'id': client.id }) }}" >Modifier</a></li>
                   </ul>
                 </div>
                 </td>
@@ -90,4 +90,11 @@
 
 
 
+{% endblock %}
+{% block admin_lte_footer %}
+<footer class="main-footer">
+                <div class="pull-right hidden-xs"><b>Version</b> 1.0.0</div>
+                <strong>Copyright &copy; 2019-2020 <a href="">Connecti</a>.</strong>
+                All rights reserved.
+            </footer>
 {% endblock %}

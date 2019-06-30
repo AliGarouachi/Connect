@@ -22,6 +22,7 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
             new Nelmio\CorsBundle\NelmioCorsBundle(),
             new EnricoStahn\Bundle\GuzzleStereoBundle\GuzzleStereoBundle(),
+            new Skies\QRcodeBundle\SkiesQRcodeBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
