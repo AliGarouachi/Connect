@@ -95,7 +95,6 @@ export class LoginPage implements OnInit {
     this.login.login(this.onLoginForm).subscribe(res=>{
       this.login.Store(this.onLoginForm.get('username'));
       this.login.getcurrentuser();
-      console.log(LoginService.user);
       //this.navCtrl.navigateRoot('/home-results');
     });
     // this.navCtrl.navigateRoot('/home-results');
