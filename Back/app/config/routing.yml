@@ -10,3 +10,7 @@ sbs_adminlte_user_logout:
 app:
     resource: "@AppBundle/Resources/config/routing.yml"
     prefix:   /
+homepage:
+    path:     /
+    defaults: { _controller: "AppBundle:Product:index" }
+    methods:  GET

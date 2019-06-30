@@ -3,6 +3,7 @@
 {% block admin_lte_logo %}
                     <a href="" class="logo">
                         <span class="logo-mini"><b>W</b>C</span>
+                        <img src="../images/Logo-Wincom.png" class="img-circle">
                         <img src="../../images/Logo-Wincom.png" class="img-circle">
                     </a>
 {% endblock %}
@@ -42,6 +43,7 @@
               <table class="table table-hover">
         <thead>
             <tr>
+                <th>ID Product</th>
                 <th>Name</th>
                 <th>Price</th>
                 <th>Qt</th>
@@ -53,6 +55,7 @@
         <tbody>
         {% for product in products %}
             <tr>
+                <td>{{ product.id }}</td>
                 <td><a href="{{ path('product_show', { 'id': product.id }) }}">{{ product.name }}</a></td>
                 <td>{{ product.price }}</td>
                 <td>{{ product.qt }}</td>
