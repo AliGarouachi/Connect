@@ -113,7 +113,7 @@ export class HomeResultsPage {
       }
 
     });
-    this.GiveAccess = true;
+    //this.GiveAccess = true;
   }
   addtoAddition(product)
   {
