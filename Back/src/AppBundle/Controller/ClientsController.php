@@ -53,6 +53,7 @@ class ClientsController extends Controller
             $lastuser = $em->getRepository('AppBundle:FosUser')->findOneBy([], ['id' => 'desc']);
             $lastaccount = $em->getRepository('AppBundle:Accounts')->findOneBy([], ['id' => 'desc']);
             $client->setIdfos($lastuser);
+            $lastaccount->setIdclient($client);
             $client->setIdAccount($lastaccount);
             $em->persist($client);
             $em->flush();
