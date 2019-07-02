@@ -16,12 +16,12 @@ export class TransactionService {
   {
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
-    this.http.post('http://localhost/Connect/Connect/Back/web/app_dev.php/transactions/new',form,options).subscribe(res=>{
+    this.http.post('http://192.168.100.79/back/web/app_dev.php/transactions/new',form,options).subscribe(res=>{
     });
   }
   get(id)
   {
-    this.http.get('http://localhost/Connect/Connect/Back/web/app_dev.php/transactions/personnel/'+id).subscribe(res=>{
+    this.http.get('http://192.168.100.79/back/web/app_dev.php/transactions/personnel/'+id).subscribe(res=>{
     });
   }
 }
