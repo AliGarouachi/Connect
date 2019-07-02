@@ -7,7 +7,7 @@
                     </a>
 {% endblock %}
 
- 
+
 {% block admin_lte_sidebar %}
 
 <ul class="sidebar-menu tree" data-widget="tree">
@@ -16,15 +16,6 @@
         <li><a href="{{ path('employees_index') }}"><i class="fa fa-users text-yellow"></i> <span>Employees</span></a></li>
         <li><a href="{{ path('transactions_index') }}"><i class="fa fa-credit-card-alt text-green"></i> <span>Transactions</span></a></li>
         <li><a href="{{ path('clients_index') }}"><i class="fa fa-user-circle-o text-aqua"></i> <span>Clients</span></a></li>
-<<<<<<< HEAD
-        <li><a href="{{ path('accounts_index') }}"><i class="fa fa-circle-o text-red    " aria-hidden="true"></i> <span>Comptes</span></a></li>
-                
-{% endblock %}
-{% block header_content %}{% endblock %}
-{% block page_content %}
-    <h1>Accounts list</h1>             
-              <a href="{{ path('accounts_new') }}" class="btn btn-app" style="float: right;" ><i class="fa fa-plus"></i>Ajouter un compte</a>
-=======
         <li><a href="{{ path('accounts_index') }}"><i class="fa fa-circle-o text-red    " aria-hidden="true"></i> <span>Accounts</span></a></li>
 
 {% endblock %}
@@ -32,7 +23,7 @@
 {% block page_content %}
     <h1>Accounts list</h1>
               <a href="{{ path('accounts_new') }}" class="btn btn-app" style="float: right;" ><i class="fa fa-plus"></i>Add Account</a>
->>>>>>> 9861731c7d8cdc80ac14d46066267e8d58ff765b
+
 
 
     <div class="row">
@@ -57,19 +48,12 @@
         <thead>
             <tr>
                 <th>Id</th>
-<<<<<<< HEAD
                 <th>Montant</th>
                 <th>Nombre d'accès</th>
                 <th>Date d'expiration</th>
                 <th>Date de reception</th>
-=======
                 <th>Amount</th>
-                <th>Qr code</th>
-                <th>Number access</th>
-                <th>Expiration date</th>
-                <th>Receiving date</th>
                 <th>Client</th>
->>>>>>> 9861731c7d8cdc80ac14d46066267e8d58ff765b
                 <th>Actions</th>
             </tr>
         </thead>

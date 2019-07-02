@@ -26,7 +26,6 @@ class TransactionsController extends Controller
         // $serializer=new Serializer([new ObjectNormalizer()]);
         // $transactions=$serializer->normalize($transactions);
         // return new JsonResponse($transactions);
-    
         return $this->render('transactions/index.html.twig', array(
             'transactions' => $transactions,
         ));
@@ -38,8 +37,6 @@ class TransactionsController extends Controller
     public function getbypersonnelAction($id)
     {
         $em = $this->getDoctrine()->getManager();
-
-
         $transactions = $em->getRepository('AppBundle:Transactions')->findBy(array("idemployee"=>$id));
         $serializer=new Serializer([new ObjectNormalizer()]);
         $transactions=$serializer->normalize($transactions);

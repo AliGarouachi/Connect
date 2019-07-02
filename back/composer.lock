@@ -2010,12 +2010,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/koftikes/symfony-adminlte-bundle.git",
-                "reference": "04ff1a8d37ff717e37eaa515eb66907955f8238b"
+                "reference": "2a23e6f6268dae5423a8a94b82c137531ebb5742"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/koftikes/symfony-adminlte-bundle/zipball/04ff1a8d37ff717e37eaa515eb66907955f8238b",
-                "reference": "04ff1a8d37ff717e37eaa515eb66907955f8238b",
+                "url": "https://api.github.com/repos/koftikes/symfony-adminlte-bundle/zipball/2a23e6f6268dae5423a8a94b82c137531ebb5742",
+                "reference": "2a23e6f6268dae5423a8a94b82c137531ebb5742",
                 "shasum": ""
             },
             "require": {
@@ -2516,7 +2516,7 @@
                 },
                 {
                     "name": "Gert de Pagter",
-                    "email": "BackEndTea@gmail.com"
+                    "email": "backendtea@gmail.com"
                 }
             ],
             "description": "Symfony polyfill for ctype functions",

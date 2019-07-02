@@ -9,14 +9,14 @@ import { LoginService } from 'src/app/Service/Login/login.service';
 })
 export class AboutPage implements OnInit {
   transactions:any;
-  constructor(  public transaction:TransactionService
+  constructor(  public transaction:TransactionService,public login:LoginService
 
   ) { 
 
    }
 
   ngOnInit() {
-    this.transaction.get(1).subscribe(res=>{
+    this.transaction.get(LoginService.user.id).subscribe(res=>{
       this.transactions=res.json();
       this.transactions.forEach(trans => {
        console.log( trans.date=new Date(trans.date.timestamp).toLocaleString());
